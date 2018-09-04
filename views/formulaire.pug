@@ -1,0 +1,77 @@
+extends layout.pug
+block title
+    title=titre
+block content
+    h3 Formulaire pour alimenter alter egaux
+    form(encrypt='multipart/form-data')
+        .row
+            .col-md-2.form-group
+                label(for='libelle') Libellé
+                input.form-control(type='text', placeholder='ex: Affiche ...', required,name='libelle')
+            .col-md-1.form-group
+                label(for='nature') Nature
+                select.form-control(required,name='nature')
+                    option(value='Lien') Lien
+                    option(value='Document PDF') Document PDF
+                    option(value='Vidéo') Vidéo
+                    option(value='Audio') Audio
+                    option(value='Application') Application
+                    option(value='Autre') Autre
+            .col-md-2.form-group
+                label(for='categorie') Catégorie
+                select.form-control(required,name='categorie')
+                    option.disabled(value='') Choix catégorie
+                    option(value='Education') Education
+                    option(value='Environnement') Environnement & citonyenneté
+                    option(value='Faim') Faim
+                    option(value='Pauverete') Pauvereté
+                    option(value='Interculturel') Interculturel
+                    option(value='Egalite') Egalité
+                    option(value='Paix') Paix
+                    option(value='Sante') Santé
+                    option(value='Travail') Travail
+                    option(value='Ville') Ville
+            .col-md-2.form-group
+                label(for='doc') Le document
+                label.btn.btn-info.btn-file Parcourir 
+                    input(name='doc',type='file', style='display: none;', required, accept=".pdf , .xlsx , .xls, .pptx, .ppt, .doc, .docx")
+            .col-md-2.form-group
+                label(for='miniature') La miniature
+                label.btn.btn-info.btn-file Parcourir 
+                    input(name='miniature', type='file', style='display: none;', required, accept=".jpg, .jpeg, .png")
+            .col-md-2.form-group
+                label(for='nature') Lien
+                input.form-control(name="nature",type='text', placeholder='http://exemplelien.com/document')
+            .col-md-1.form-group
+                label Enregistrer
+                button#save.btn.btn-success
+                    i.fa.fa-save
+        input(type="hidden", id="token",value=token)
+    - var listOfDoc=list
+    .row
+        table.table.table-stripped
+            thead
+                th #
+                th Aperçu
+                th Catégorie
+                th Libellé du document
+                th Nature du document
+                th Date de publication
+                th Lien
+            tbody
+                - var i=0
+                each elt in list
+                    tr
+                        td= ++i
+                        td.col-md-2
+                            a(href=elt.miniature)
+                                img.img-fluid.img-responsive(src=elt.miniature)
+                        td=elt.categ
+                        td=elt.libelle
+                        td=elt.nature
+                        td=elt.datecreation
+                        td
+                            a(href=elt.chemin) Télécharger &nbsp
+                                i.fa.fa-download
+                else
+                    tr Aucun document n'a encore été uploadé

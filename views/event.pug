@@ -1,0 +1,16 @@
+extends layout.pug
+block title
+    title=titre
+block content
+    style=paddingvalue
+    .alert.alert-info
+        h5 Liste des événements :
+    ul.list-inline
+        - var listOfDoc=list
+        each elt in list
+            li.list-inline-item
+                    figure.animated.bounceInUp
+                        a(href=elt.cheminaffiche, style='cursor:zoom-in')
+                            img(src=elt.cheminminiature )
+                        figcaption
+                            a.btn.btn-info(href=elt.lien) Télécharger le guide

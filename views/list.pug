@@ -1,0 +1,36 @@
+extends layout.pug
+block title
+    title=titre
+mixin row(items)
+    tr
+        each item, index in items
+            td=item
+
+mixin table(tableData)
+    table
+        each row,index in tableData
+            +row(row)
+
+block content
+    img(src='/asset/img/'+lien+'.png', alt="Logo categorie" class="mx-auto d-block")
+    - var listOfDoc=list
+    .row
+        table.table.table-stripped
+            thead
+                th #
+                th Libellé du document
+                th Nature du document
+                th Date de publication
+                th Lien
+            tbody
+                - var i=0
+                each elt in list
+                    tr
+                        td= ++i
+                        td=elt.libelle
+                        td=elt.nature
+                        td=elt.datecreation
+                        td
+                            a(href=elt.chemin) Télécharger
+                else
+                    tr Aucun document n'a encore été uploadé dans cette catégorie

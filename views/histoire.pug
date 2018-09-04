@@ -1,0 +1,84 @@
+extends layout.pug
+block title
+    title=titre
+block content
+    style=paddingvalue
+    .alert.alert-info
+        h3 Les personnages :
+    ul.list-inline
+        li.list-inline-item
+            img.animated.bounceInUp(src="/asset/img/personnages/carlos.jpg",id="a")
+        li.list-inline-item
+            img.animated.bounceInDown(src="/asset/img/personnages/eugenie.jpg", id="b")
+        li.list-inline-item
+            img.animated.bounceInUp(src="/asset/img/personnages/idriss.jpg", id="c")
+        li.list-inline-item
+            img.animated.bounceInDown(src="/asset/img/personnages/nino.jpg", id="d")
+        li.list-inline-item
+            img.animated.bounceInUp(src="/asset/img/personnages/odile.jpg", id="e")
+        li.list-inline-item
+            img.animated.bounceInDown(src="/asset/img/personnages/thea.jpg", id="f")
+        li.list-inline-item
+            img.animated.bounceInUp(src="/asset/img/personnages/yakou.jpg", id="g")
+    p.alert.alert-info Passer la souris sur un personnage pour voir sa description
+    h3 Télécharger les dernières épisodes de l'histoire de nos personnages
+    .modal.fade(tabindex='-1', role='dialog', id="ep1")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Episode 1
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    img(src="/asset/img/thumbnails/ep1.jpg", alt="")
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
+                    a.btn.btn-success(href="/asset/docs/histoires/EQ246 - Histoire AE - EPISODE1.pdf") Télécharger
+                        i.fa.fa-download
+    .modal.fade(tabindex='-1', role='dialog', id="ep2")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Episode 2
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    img(src="/asset/img/thumbnails/ep2.jpg", alt="")
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
+                    a.btn.btn-success(href="/asset/docs/histoires/EQ247 - Histoire AE - EPISODE2.pdf") Télécharger
+                        i.fa.fa-download
+    table.table.stripped
+        thead
+            th #Episode
+            th Titre
+            th Aperçu
+            th Téléchargement
+        tbody
+            tr
+                td 1
+                td L'objet mystérieux
+                td
+                    a(data-toggle='modal', data-target='#ep1', style="cursor:zoom-in;")
+                        img.img-thumbnail(src="/asset/img/thumbnails/ep1.jpg", alt="" width="20%")
+                td 
+                    a.btn.btn-info(href="/asset/docs/histoires/episode1.pdf")
+                        i.fa.fa-download
+            tr
+                td 2
+                td L'été du Nynom
+                td
+                    a(data-toggle='modal', data-target='#ep2', style="cursor:zoom-in;")
+                        img.img-thumbnail(src="/asset/img/thumbnails/ep2.jpg", alt="", width="20%")
+                td
+                    a.btn.btn-info(href="/asset/docs/histoires/episode2.pdf")
+                        i.fa.fa-download
+    script.
+        $("img").mouseenter(function (evt, btn) {
+        $("#" + evt.currentTarget.id).animateCss('flipInY');
+        $("p").html(descriptionpersonnage[evt.currentTarget.id])});
+        $("img").mouseleave(()=>{$("p").html("Passer la souris sur un personnage pour voir sa description");
+        })
+        //- $('.modal').on('shown.bs.modal', function () {
+        //- $('#myInput').trigger('focus')
+        //- })

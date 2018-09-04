@@ -1,0 +1,75 @@
+.bg-primary {
+    background-color: #ffaf40 !important;
+}
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color: rgb(0, 156, 167);
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(0, 0, 0);
+}
+p {
+    padding-bottom : 100 px !important;
+    color:black;
+}
+h5{
+    color:black;
+}
+body {
+  padding-top: 10rem;
+}
+
+
+.fix{
+    position:fixed;
+    bottom:0px;
+    left:77%;
+    width: 40%;
+    z-index: -1;
+    /* opacity: 0.5; */
+}
+
+
+@font-face {
+    font-family: TrashHand;
+    src: url(/asset/fonts/Titre/TrashHand.TTF);
+}
+@font-face {
+    font-family: CalibreRegular;
+    src: url('/asset/fonts/Calibre-Regular.otf');
+}
+.blockquote{
+    font-family: TrashHand;
+    font-size: 14pt;
+}
+#carouselExampleIndicators{
+    font-family: CalibreRegular;
+    font-size: 12pt;
+}
+.sl{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+}
+article{
+    font-family: CalibreRegular;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
