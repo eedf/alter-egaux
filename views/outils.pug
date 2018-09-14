@@ -3,83 +3,48 @@ block title
     title=titre
 block content
     style=paddingvalue
-    .alert.alert-info
-        p Nous mettons à votre diposition une palette d'outils de communication autour du projet Alter-Egaux
+    .alert.alert-info 
+        span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-exclamation.fa-stack-1x.fa-inverse
+        span Nous mettons à votre diposition une palette d'outils de communication autour du projet Alter-Egaux
     h5 Liste des outils
-    table.table.stripped
+    table.table.stripped.display(id="example")
         thead
             th.col-md-1 #
             th.col-md-2 Libellé
-            th.col-md-8 Description
-            th.col-md-1 Téléchargement
+            th.col-md-5 Description
+            th.col-md-2 Aperçu
+            th.col-md-2 Téléchargement
         tbody
-            tr
-                td 1
-                td Polices (Alter-Egaux)
-                td Polices à utiliser pour les documents Alter-Egaux. TrashHand pour les titres et Calibre pour le texte courant.
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/31194/polices---alter-egaux.html")
-                        i.fa.fa-download
-            tr
-                td 2
-                td Charte graphique Alter-Egaux
-                td N/A
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/31195/charte-graphique---alter-egaux.html")
-                        i.fa.fa-download
-            tr
-                td 3
-                td Pictogrammes ODD (Format Carré)
-                td Les pictogrammes de l'ONU adaptés par les EEDF pour le projet Alter-égaux. 
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/30269/pictogrammes-odd---format-carre.html")
-                        i.fa.fa-download
-            tr
-                td 4
-                td Pictogrammes ODD (Format Rond)
-                td Les pictogrammes de l'ONU adaptés par les EEDF pour le projet Alter-égaux. 
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/30270/pictogrammes-odd---format-rond.html")
-                        i.fa.fa-download
-            tr
-                td 5
-                td Affiche Nuit de la belle étoile
-                td N/A
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/31212/affiche-nuit-de-la-belle-etoile.html")
-                        i.fa.fa-download
-            tr
-                td 6
-                td Affiche NBE (Infos et contact)
-                td Complément à insérer sous l'affiche Nuit de la belle étoile, pour indiquer le lieu et la date de l'événement ainsi que le contact du groupe. Fichier personnalisable sous Powerpoint. 
-                td
-                    a.btn.btn-info(href="http://www.eedf.fr/download/31193/affiche-nbe---infos-et-contact.html")
-                        i.fa.fa-download
-            tr
-                td 7
-                td Guide - Nuit de la belle étoile
-                td N/A
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/31191/guide---nuit-de-la-belle-etoile.html")
-                        i.fa.fa-download
-            tr
-                td 8
-                td Guide - Journée Trappeur
-                td N/A
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/32625/guide---journee-trappeur.html")
-                        i.fa.fa-download 
-            tr
-                td 9
-                td Guide - Journée de la curiosité
-                td N/A
-                td 
-                    a.btn.btn-info(href="http://www.eedf.fr/download/32626/guide---journee-de-la-curiosite.html")
-                        i.fa.fa-download
-            tr
-                td 10
-                td Personnages de l'histoire Alter-Egaux
-                td Fichier compressé contenant les images des personnages de l'histoire Alter-Egaux
-                td 
-                    a.btn.btn-info(href="/asset/docs/tools/personnages-alter-egaux.zip")
+            - var i=1
+            each elt in list
+                 tr
+                    td=i++
+                    td=elt.libelle
+                    td=elt.description
+                    td
+                        img(src="/asset/img/tools/"+elt.apercu, alt=elt.libelle, width="50%")
+                    td 
+                        a.btn.btn-info(href=elt.lien)
                             i.fa.fa-download
+                        br
+                        |
+                        span.small Ajouté le #{elt.dateajout}
+block javascript
+    script(src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
+    script.
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "language": {
+                "lengthMenu": "Afficher _MENU_ entrées par page",
+                "zeroRecords": "Aucune entrée trouvée n'a été trouvé",
+                "info": "Affichage de page _PAGE_ sur _PAGES_",
+                "infoEmpty": "Aucune entrée disponible",
+                "infoFiltered": "(filtré parmi _MAX_ entrées)",
+                "search":"Chercher",
+                "Previous":"Précédent",
+                "Next":"Suivant"
+            }
+            });
+        } );

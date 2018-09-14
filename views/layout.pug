@@ -12,6 +12,7 @@ html
             script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js")
             script(src="/asset/js/script.js")
             link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
+            link(rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css")
             link(rel="stylesheet" href="/asset/css/animate.css")
     body
         block navmenu
@@ -33,10 +34,13 @@ html
                             a.nav-link(href='/outils') Outils de Comm'
                         li.nav-item
                             a.nav-link(href='/event') Evénements
-                    form.form-inline.my-2.my-lg-0
-                        a.primary(href='/login')
-                            i.fa.fa-sign-in
+                        li.nav-item
+                            a.nav-link(href='/partners') Partenaires
+                    .form-inline.my-2.my-lg-0
+                        label.blockquote.text-danger LES ECLAIREUSES ECLAIREURS DE FRANCE VOUS INVITENT A VIVRE
+
         .container
             block content
         block foot
-            img.fix(src="/asset/img/bandeau/bleu_slim.png")   
+            img.fix(src="/asset/img/bandeau/bleu_slim.png")
+        block javascript

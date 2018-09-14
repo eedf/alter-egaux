@@ -1,0 +1,78 @@
+
+extends views/layout.pug
+block title
+    title=titre
+block content
+    p.text-center.blockquote Former des citoyens ouverts sur le monde, heureux, responsables et engagés. Bâtisseurs d’avenir d’une terre en équilibre et d’une société équitable.
+    .row
+        .col-md-1
+        .col-md-2
+            a(href='/list/education')
+                img#a.animated.bounceIn.ico(src='asset/img/ODD-Education_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/egalite')
+                img#b.animated.bounce.ico(src='asset/img/ODD-Egalite_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/environnement')
+                img#c.animated.bounceInDown.ico(src='asset/img/ODD-Environnement_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/faim')
+                img#d.animated.bounceInUp.ico(src='asset/img/ODD-Faim_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/interculturel')
+                img#e.animated.bounceInLeft.ico(src='asset/img/ODD-Interculturel_RVB.png', alt='', width='100%')
+        .col-md-1
+    .row
+        .col-md-1
+        .col-md-2
+            a(href='/list/paix')
+            img#f.animated.bounceInRight.ico(src='asset/img/ODD-Paix_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/pauvrete')
+            img#g.animated.jello.ico(src='asset/img/ODD-Pauvrete.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/sante')
+            img#h.animated.bounce.ico(src='asset/img/ODD-Sante_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/travail')
+            img#i.animated.bounce.ico(src='asset/img/ODD-Travail_RVB.png', alt='', width='100%')
+        .col-md-2
+            a(href='/list/ville')
+            img#j.animated.bounce.ico(src='asset/img/ODD-Villes_RVB.png', alt='', width='100%')
+        .col-md-1
+    .row    
+        .col-md-10.offset-md-2
+            #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+                ol.carousel-indicators
+                    li.active(data-target='#carouselExampleIndicators', data-slide-to='0')
+                    li(data-target='#carouselExampleIndicators', data-slide-to='1')
+                .carousel-inner
+                    .carousel-item.active
+                        img.float-left(src='asset/img/ODD-Egalite_NB.png', alt='', width='15%')
+                        p.sl
+                            h5 Nouveau document dans la catégorie égalité :
+                            | Livret mixicamp à consulter dans la rubriques égalité.
+                            br 
+                            | Description détaillée dans le document.
+                            a.btn.btn-info(href='/asset/docs/egalite/livret-mixicampV1.pdf') Consulter
+                        p
+                    .carousel-item
+                        img.float-left(src='asset/img/Logo_RVB-04.png', alt='', width='20%')
+                        p.sl
+                        h5 Nouveaux documents dans la rubrique histoire :
+                        | 2 épisodes de l'histoire de nos heros
+                        br
+                        | Description détaillée dans le lien.
+                        a.btn.btn-info(href='/histoire') Consulter
+                        p
+                    a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+                        span.fa.fa-chevron-left(aria-hidden='true')
+                        span.sr-only Previous
+                    a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+                        span.carousel-control-next-icon(aria-hidden='true')
+                        span.sr-only Next
+    style .carousel-item { height: 150px; }
+    script.
+        $(".ico").mouseenter(function (evt, btn) {
+        $("#" + evt.currentTarget.id).animateCss('flipInY');
+        });

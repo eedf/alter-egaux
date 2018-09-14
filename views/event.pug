@@ -5,12 +5,12 @@ block content
     style=paddingvalue
     .alert.alert-info
         h5 Liste des événements :
-    ul.list-inline
-        - var listOfDoc=list
-        each elt in list
-            li.list-inline-item
+    table.table
+        tr
+            each elt in list
+                td.col-md-3
                     figure.animated.bounceInUp
                         a(href=elt.cheminaffiche, style='cursor:zoom-in')
-                            img(src=elt.cheminminiature )
+                            img.img.img-fluid.img-responsive(src="/asset/docs/evenements/min/"+ elt.cheminminiature )
                         figcaption
                             a.btn.btn-info(href=elt.lien) Télécharger le guide

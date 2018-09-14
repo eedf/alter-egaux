@@ -1,0 +1,16 @@
+extends layout.pug
+block title
+    title=titre
+
+block content
+    style=paddingvalue
+    h4 Bienvenue #{userlogin} | &nbsp;
+        a(href="/logout")
+            i.fa.fa-sign-out
+    ul.list-unstyled
+        li
+            a(href="/add/tool") Mise à jour des outils
+        li
+            a(href="/add/docodd") Mise à jour des documents ODD
+        li
+            a(href="/add/event") Mise à jour des événements

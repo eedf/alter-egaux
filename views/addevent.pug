@@ -1,0 +1,40 @@
+extends layout.pug
+block title
+    title=titre
+block content
+    nav(aria-label='breadcrumb')
+            ol.breadcrumb
+                li.breadcrumb-item
+                    a(href='/menu') Menu
+                li.breadcrumb-item.active(aria-current='page') Mise à jour événements
+    .alert.alert-info 
+        span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-exclamation.fa-stack-1x.fa-inverse
+        span Mise à jour des événements
+    form(action="/addevent" method="POST")
+        input(name="token" hidden value=token)   
+        label(for="libelle") Libellé
+        input.form-control(type="text" name="libelle" id="libelle" required)
+        label(for="description") Description
+        input.form-control(type="text" name="description" id="description" required)
+        label(for="lien") Lien
+        input.form-control(type="text" name="lien" id="lien" required)
+        label(for="miniature") Lien miniature
+        input.form-control(type="text" name="miniature" id="miniature" required)
+        label(for="affiche") Lien affiche pdf
+        input.form-control(type="text" name="affiche" id="affiche" required)
+        button.btn.btn-primary(type="submit") Enregistrer &nbsp;
+            i.fa.fa-save 
+        button.btn.btn-success(type="reset") Effacer &nbsp;
+            i.fa.fa-recycle 
+    h5 Liste des événements :
+    table.table
+        tr
+            each elt in list
+                td.col-md-3
+                    figure.animated.bounceInUp
+                        a(href=elt.cheminaffiche, style='cursor:zoom-in')
+                            img.img.img-fluid.img-responsive(src="/asset/docs/evenements/min/"+ elt.cheminminiature )
+                        figcaption
+                            a.btn.btn-info(href=elt.lien) Télécharger le guide

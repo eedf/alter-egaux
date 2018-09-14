@@ -1,0 +1,51 @@
+extends layout.pug
+block title
+    title=titre
+block content
+    nav(aria-label='breadcrumb')
+        ol.breadcrumb
+            li.breadcrumb-item
+                a(href='/menu') Menu
+            li.breadcrumb-item.active(aria-current='page') Mise à jour outils
+    .alert.alert-info 
+        span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-exclamation.fa-stack-1x.fa-inverse
+        span Mise à jour des outils
+    form#toolform(action="/addtool", method="POST")
+        input(name="token" hidden value=token)   
+        label(for="libelle") Libellé
+        input.form-control(type="text" name="libelle" id="libelle" required)
+        label(for="description") Description
+        input.form-control(type="text" name="description" id="description" required)
+        label(for="apercu") Aperçu (nom fichier)
+        input.form-control(type="text" name="apercu" id="apercu" required)
+        label(for="lien") Lien téléchargement
+        input.form-control(type="text" name="lien" id="lien" required)
+        button#save.btn.btn-primary Enregistrer &nbsp;
+            i.fa.fa-save 
+        button.btn.btn-success(type="reset") Effacer &nbsp;
+            i.fa.fa-recycle
+    h5 Liste des outils
+    table.table.stripped.display(id="example")
+        thead
+            th.col-md-1 #
+            th.col-md-2 Libellé
+            th.col-md-5 Description
+            th.col-md-2 Aperçu
+            th.col-md-2 Téléchargement
+        tbody
+            - var i=1
+            each elt in list
+                 tr
+                    td=i++
+                    td=elt.libelle
+                    td=elt.description
+                    td
+                        img(src="/asset/img/tools/"+elt.apercu, alt=elt.libelle, width="50%")
+                    td 
+                        a.btn.btn-info(href=elt.lien)
+                            i.fa.fa-download
+                        br
+                        |
+                        span.small Ajouté le #{elt.dateajout} 
