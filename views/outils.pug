@@ -11,16 +11,14 @@ block content
     h5 Liste des outils
     table.table.stripped.display(id="example")
         thead
-            th.col-md-1 #
-            th.col-md-2 Libellé
-            th.col-md-5 Description
-            th.col-md-2 Aperçu
-            th.col-md-2 Téléchargement
+            th Libellé
+            th Description
+            th Aperçu
+            th Téléchargement
         tbody
             - var i=1
             each elt in list
                  tr
-                    td=i++
                     td=elt.libelle
                     td=elt.description
                     td
