@@ -5,12 +5,16 @@ block content
     style=paddingvalue
     .alert.alert-info
         h5 Liste des événements :
-    table.table
-        tr
-            each elt in list
-                td.col-md-3
-                    figure.animated.bounceInUp
-                        a(href=elt.cheminaffiche, style='cursor:zoom-in')
-                            img.img.img-fluid.img-responsive(src="/asset/docs/evenements/min/"+ elt.cheminminiature )
-                        figcaption
-                            a.btn.btn-info(href=elt.lien) Télécharger le guide
+    .row
+        each elt in list
+            .col-md-3
+                figure.animated.bounceInUp
+                    a(href=elt.cheminaffiche, style='cursor:zoom-in')
+                        img.img.img-fluid.img-responsive(src="/asset/docs/evenements/min/"+ elt.cheminminiature )
+                    figcaption
+                        a.btn.btn-info(href=elt.lien) Le guide &nbsp;&nbsp;
+                            i.fa.fa-download
+                        if elt.cheminminiature=="afficherentree.png"
+                            a.btn.btn-info(href="http://www.eedf.fr/download/34712/cartes-d-invitation---journee-de-rentree.html") Les invitations &nbsp;&nbsp;
+                                i.fa.fa-download
+

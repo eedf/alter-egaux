@@ -15,29 +15,31 @@ html
             link(rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css")
             link(rel="stylesheet" href="/asset/css/animate.css")
     body
+        header
+            .brand.text-center
+                h1 LES ECLAIREUSES ECLAIREURS DE FRANCE VOUS INVITENT A VIVRE
         block navmenu
-            .bs-component
-            nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
-                img(src='/asset/img/alteregaux logo.PNG', alt='logo alter egaux', width=widthValue)
-                a.navbar-brand(href='#')
-                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarColor01', aria-controls='navbarColor01', aria-expanded='false', aria-label='Toggle navigation')
-                    span.navbar-toggler-icon
-                #navbarColor01.collapse.navbar-collapse
-                    ul.navbar-nav.mr-auto
-                        li.nav-item
-                            a.nav-link(href='/')| Accueil
-                        li.nav-item
-                            a.nav-link(href='/projet') Le projet
-                        li.nav-item
-                            a.nav-link(href='/histoire') Histoire
-                        li.nav-item
-                            a.nav-link(href='/outils') Outils de Comm'
-                        li.nav-item
-                            a.nav-link(href='/event') Evénements
-                        li.nav-item
-                            a.nav-link(href='/partners') Partenaires
-                    .form-inline.my-2.my-lg-0
-                        label.blockquote.text-danger LES ECLAIREUSES ECLAIREURS DE FRANCE VOUS INVITENT A VIVRE
+            .bs-docs-section.clearfix
+                .bs-component
+                    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+                        img(src='/asset/img/alteregaux logo.PNG', alt='logo alter egaux', width=widthValue)
+                        a.navbar-brand(href='#')
+                        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarColor01', aria-controls='navbarColor01', aria-expanded='false', aria-label='Toggle navigation')
+                            span.navbar-toggler-icon
+                        #navbarColor01.collapse.navbar-collapse
+                            ul.navbar-nav.mr-auto
+                                li.nav-item
+                                    a.nav-link(href='/')| Accueil
+                                li.nav-item
+                                    a.nav-link(href='/projet') Le projet
+                                li.nav-item
+                                    a.nav-link(href='/histoire') Histoire
+                                li.nav-item
+                                    a.nav-link(href='/outils') Outils de Comm'
+                                li.nav-item
+                                    a.nav-link(href='/event') Evénements
+                                li.nav-item
+                                    a.nav-link(href='/partners') Partenaires
 
         .container
             block content

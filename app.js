@@ -54,42 +54,11 @@ app.get('/partners', (req, res) => {
 	//sendsms('partners url hit')
     res.render(__dirname+ '/views/partners.pug',
 				{
-				paddingvalue:"body {padding-top:5rem;}}",
 				widthValue:'10%',
 				titre:'Alter-Egaux : Partenaires'
 				}
 			)
 })
-// app.post('/adddocodd', (req, res) => {
-// 	sendsms('formulaire url hit')
-// 	// let ip=req.connection.remoteAddress.split(':')[3]
-// 	// let token = sha(ip)
-// 	// connection=getMysqlConnection()
-// 	// connection.connect()
-//     // let sqlQuery = 'select id, libelle,nature,chemin,lienhttp, DATE_FORMAT(datereation, "%d/%m/%Y")datecreation,miniature,UPPER(categorie) as categ from document where true'
-//     // connection.query(sqlQuery,function(err,result){
-// 	// 			if(err) 
-// 	// 				throw err
-// 	// 			else
-// 	// 				res.render(__dirname+ '/views/formulaire.pug',
-// 	// 						{
-// 	// 						token:token,
-// 	// 						list:result,
-// 	// 						widthValue:'10%',
-// 	// 						titre:'Alter-Egaux : Formulaire'
-// 	// 						}
-// 	// 					)
-// 	// 				})
-// 	// connection.end()
-// 	res.render(__dirname+ '/views/adddocodd.pug',
-// 							{
-// 							token:'token',
-// 							list:[],
-// 							widthValue:'10%',
-// 							titre:'Alter-Egaux : Mise à jour odd'
-// 							}
-// 						)
-// })
 app.get('/list/:categoryId', (req, res) => {
 	sendsms('list document'+ req.params.categoryId +'  url hit')
 	if(req.params.categoryId){
@@ -116,7 +85,7 @@ app.get('/projet',(req,res)=>{
 	res.render(__dirname+ '/views/projet.pug',
 		{
 			widthValue:'10%',
-			paddingvalue:"body {padding-top:5rem;}",
+			//paddingvalue:"body {padding-top:5rem;}",
 			titre:'Alter-Egaux : Le projet'
 		}
 	);
@@ -134,7 +103,7 @@ app.get('/event',(req,res)=>{
 			res.render(__dirname + '/views/event.pug', {
 				list:result,
 				widthValue: '10%',
-				paddingvalue: "body {padding-top:5rem;}",
+				//paddingvalue: "body {padding-top:5rem;}",
 				titre: 'Alter-Egaux : Evénements'
 			});
 	connection.end()
@@ -145,7 +114,7 @@ app.get('/histoire',(req,res)=>{
 	res.render(__dirname+ '/views/histoire.pug',
 			{
 				widthValue:'10%',
-				paddingvalue:"body {padding-top:5rem;}",
+				//paddingvalue:"body {padding-top:5rem;}",
 				titre:'Alter-Egaux : Histoire'
 			}
 		);
@@ -163,7 +132,7 @@ app.get('/outils',(req,res)=>{
 			{
 				list:result,
 				widthValue:'10%',
-				paddingvalue:"body {padding-top:5rem;}",
+				//paddingvalue:"body {padding-top:5rem;}",
 				titre:'Alter-Egaux : Outils de communication'
 			}
 		)
@@ -174,7 +143,7 @@ app.get('/',(req,res)=>{
 	res.render(__dirname+ '/index.pug',
 			{
 				widthValue:'20%',
-				paddingvalue:"body {padding-top:5rem;}",
+				//paddingvalue:"body {padding-top:5rem;}",
 				titre:'Alter-Egaux : Accueil'
 			}
 		);
@@ -199,7 +168,7 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								list:result,
 								token:token,
 								widthValue:'10%',
-								paddingvalue:"body {padding-top:5rem;}",
+								//paddingvalue:"body {padding-top:5rem;}",
 								titre:'Alter-Egaux : Mise à jour outils'
 							})
 				})
@@ -219,7 +188,7 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								list:result,
 								token:token,
 								widthValue:'10%',
-								paddingvalue:"body {padding-top:5rem;}",
+								//paddingvalue:"body {padding-top:5rem;}",
 								titre:'Alter-Egaux : Mise à jour événements'
 							}
 						)
@@ -239,7 +208,7 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								list:result,
 								token:token,
 								widthValue:'10%',
-								paddingvalue:"body {padding-top:5rem;}",
+								//paddingvalue:"body {padding-top:5rem;}",
 								titre:'Alter-Egaux : Mise à jour docs odd'
 							}
 						)
@@ -259,7 +228,7 @@ app.get('/menu',(req,res)=>{
 		res.render(__dirname+ '/views/menu.pug',
 					{
 						widthValue:'10%',
-						paddingvalue:"body {padding-top:5rem;}",
+						//paddingvalue:"body {padding-top:5rem;}",
 						userlogin:sess.login,
 						titre:"Menu administrateur"
 					}
@@ -285,11 +254,10 @@ app.post('/addtool',(req,res)=>{
 			let sqlQuery = 'insert into outil (libelle,description,apercu,lien,dateajout) values (?,?,?,?,?)'
 			connection.query(sqlQuery,[libelle,description,apercu,lien,dateajout],function(err,result){
 				if(err) {
-					res.send(false)
 					throw err
 				}
 				else{
-					res.send(true)
+					res.redirect("/add/tool")
 				}
 			})
 		}
@@ -315,11 +283,38 @@ app.post('/adddocodd',(req,res)=>{
 			let sqlQuery = 'insert into document (categorie,libelle,nature,chemin,miniature,lienhttp,datereation,user) values (?,?,?,?,?,?,?,?)'
 			connection.query(sqlQuery,[categorie,libelle,nature,chemin,miniature,lien,dateajout,"admin"],function(err,result){
 				if(err) {
-					res.send(false)
 					throw err
 				}
 				else{
-					res.send(true)
+					res.redirect("/add/docodd")
+				}
+			})
+		}
+	}else{
+		res.redirect("/")
+	}
+})
+app.post('/addevent',(req,res)=>{
+	sess = req.session
+	if(sess.connected){
+		let ip = req.connection.remoteAddress.split(':')[3]
+		let token=sha(ip)
+		if (token==req.body.token){
+			connection=getMysqlConnection()
+			connection.connect()
+			let libelle=req.body.libelle
+			let description=req.body.description
+			let lien=req.body.lien
+			let miniature=req.body.miniature
+			let affiche=req.body.affiche
+			let dateajout=new Date()
+			let sqlQuery = 'insert into evenement (libelle,description,lien,miniature,affiche,dateajout) values (?,?,?,?,?,?)'
+			connection.query(sqlQuery,[libelle,description,lien,miniature,affiche,dateajout],function(err,result){
+				if(err) {
+					throw err
+				}
+				else{
+					res.redirect("/add/docodd")
 				}
 			})
 		}
@@ -341,7 +336,7 @@ app.post('/auth',(req,res)=>{
 			res.render(__dirname+ '/views/menu.pug',
 					{
 						widthValue:'10%',
-						paddingvalue:"body {padding-top:5rem;}",
+						//paddingvalue:"body {padding-top:5rem;}",
 						userlogin:loginadmin,
 						titre:"Menu administrateur"
 					}

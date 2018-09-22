@@ -14,8 +14,15 @@ p {
 h5{
     color:black;
 }
-body {
+/* body {
   padding-top: 10rem;
+} */
+.brand{
+    height: 50px;
+    padding: 10px;
+    background-color: #ffaf40 !important;
+    font-family: TrashHand;
+    font-size: 16pt;
 }
 
 
