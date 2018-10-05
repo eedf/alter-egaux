@@ -48,19 +48,28 @@ block content
                     li(data-target='#carouselExampleIndicators', data-slide-to='1')
                 .carousel-inner
                     .carousel-item.active
+                        img.float-left(src='asset/img/ODD-Sante_NB.png', alt='', width='15%')
+                        p.sl
+                            h5 Nouveau document dans la catégorie santé :
+                            | Revue éclés Routes Nouvelles
+                            br 
+                            | Description détaillée dans le lien.
+                            a.btn.btn-info(href='/list/sante') Consulter
+                        p
+                    .carousel-item
                         img.float-left(src='asset/img/ODD-Egalite_NB.png', alt='', width='15%')
                         p.sl
                             h5 Nouveau document dans la catégorie égalité :
                             | Livret mixicamp à consulter dans la rubriques égalité.
                             br 
-                            | Description détaillée dans le document.
-                            a.btn.btn-info(href='/asset/docs/egalite/livret-mixicampV1.pdf') Consulter
+                            | Description détaillée dans le lien.
+                            a.btn.btn-info(href='/list/egalite') Consulter
                         p
                     .carousel-item
                         img.float-left(src='asset/img/Logo_RVB-04.png', alt='', width='20%')
                         p.sl
-                        h5 Nouveaux documents dans la rubrique histoire :
-                        | 2 épisodes de l'histoire de nos heros
+                        h5 Nouveau document dans la rubrique histoire :
+                        | 3 éme épisode de l'histoire de nos heros
                         br
                         | Description détaillée dans le lien.
                         a.btn.btn-info(href='/histoire') Consulter
@@ -74,5 +83,5 @@ block content
     style .carousel-item { height: 150px; }
     script.
         $(".ico").mouseenter(function (evt, btn) {
-        $("#" + evt.currentTarget.id).animateCss('flipInY');
+            $("#" + evt.currentTarget.id).animateCss('flipInY');
         });

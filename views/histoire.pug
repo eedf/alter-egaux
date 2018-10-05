@@ -2,7 +2,6 @@ extends layout.pug
 block title
     title=titre
 block content
-    style=paddingvalue
     .alert.alert-info
         h3 Les personnages :
     ul.list-inline
@@ -33,7 +32,7 @@ block content
                     img(src="/asset/img/thumbnails/ep1.jpg", alt="")
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
-                    a.btn.btn-success(href="/asset/docs/histoires/EQ246 - Histoire AE - EPISODE1.pdf") Télécharger
+                    a.btn.btn-success(href="/asset/docs/histoires/episode1.pdf") Télécharger
                         i.fa.fa-download
     .modal.fade(tabindex='-1', role='dialog', id="ep2")
         .modal-dialog(role='document')
@@ -46,7 +45,20 @@ block content
                     img(src="/asset/img/thumbnails/ep2.jpg", alt="")
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
-                    a.btn.btn-success(href="/asset/docs/histoires/EQ247 - Histoire AE - EPISODE2.pdf") Télécharger
+                    a.btn.btn-success(href="/asset/docs/histoires/episode2.pdf") Télécharger
+                        i.fa.fa-download
+    .modal.fade(tabindex='-1', role='dialog', id="ep3")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Episode 1
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    img(src="/asset/img/thumbnails/ep3.jpg", alt="")
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
+                    a.btn.btn-success(href="/asset/docs/histoires/episode3.pdf") Télécharger
                         i.fa.fa-download
     table.table.stripped
         thead
@@ -72,6 +84,15 @@ block content
                         img.img-thumbnail(src="/asset/img/thumbnails/ep2.jpg", alt="", width="20%")
                 td
                     a.btn.btn-info(href="/asset/docs/histoires/episode2.pdf")
+                        i.fa.fa-download
+            tr
+                td 3
+                td Des retrouvailles étonnantes
+                td
+                    a(data-toggle='modal', data-target='#ep3', style="cursor:zoom-in;")
+                        img.img-thumbnail(src="/asset/img/thumbnails/ep3.jpg", alt="", width="20%")
+                td
+                    a.btn.btn-info(href="/asset/docs/histoires/episode3.pdf")
                         i.fa.fa-download
     script.
         $("img").mouseenter(function (evt, btn) {

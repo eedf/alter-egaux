@@ -2,7 +2,6 @@ extends layout.pug
 block title
     title=titre
 block content
-    style=paddingvalue
     .alert.alert-info
         h5 Liste des événements :
     .row
@@ -14,7 +13,6 @@ block content
                     figcaption
                         a.btn.btn-info(href=elt.lien) Le guide &nbsp;&nbsp;
                             i.fa.fa-download
-                        if elt.cheminminiature=="afficherentree.png"
-                            a.btn.btn-info(href="http://www.eedf.fr/download/34712/cartes-d-invitation---journee-de-rentree.html") Les invitations &nbsp;&nbsp;
-                                i.fa.fa-download
+                        a.btn.btn-success(href=""+elt.chemininvitation) Les invitations &nbsp;&nbsp;
+                            i.fa.fa-download
 

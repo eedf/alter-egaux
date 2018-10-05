@@ -1,16 +1,35 @@
 extends layout.pug
 block title
     title=titre
-mixin row(items)
-    tr
-        each item, index in items
-            td=item
-
-mixin table(tableData)
-    table
-        each row,index in tableData
-            +row(row)
-
+block withoutContainer
+    .container-fluid
+        h3(style="margin-top:30px") 17 objectifs pour sauver le monde
+        p Les objectifs de développement durable nous donnent la marche à suivre pour parvenir à un avenir meilleur et plus durable pour tous. Ils répondent aux défis mondiaux auxquels nous sommes confrontés, notamment ceux liés à la pauvreté, aux inégalités, au climat, à la dégradation de l’environnement, à la prospérité, à la paix et à la justice. Les objectifs sont interconnectés et, pour ne laisser personne de côté, il est important d’atteindre chacun d’entre eux, et chacune de leurs cibles, d’ici à 2030. Cliquez sur un objectif spécifique ci-dessous pour en savoir plus.
+    .menu-list.text-center
+        a(href="/list/education")
+            img#education.animated.rotateIn.ico(src="/asset/img/pictonb/education.png",title="Education de qualité")
+        a(href="/list/egalite")
+            img#egalite.animated.rotateIn.ico(src="/asset/img/pictonb/egalite.png",title="Egalité des genres")
+        a(href="/list/environnement")
+            img#environnement.animated.rotateIn.ico(src="/asset/img/pictonb/environnement.png",title="Environnement et écocitoyenneté")
+        a(href="/list/faim")
+            img#faim.animated.rotateIn.ico(src="/asset/img/pictonb/faim.png",title="Faim et alimentation saine")
+        a(href="/list/interculturel")
+            img#inter.animated.rotateIn.ico(src="/asset/img/pictonb/interculturel.png",title="Interculturel et rencontre de l'autre")
+        a(href="/list/paix")
+            img#paix.animated.rotateIn.ico(src="/asset/img/pictonb/paix.png",title="Construction de la paix")
+        a(href="/list/pauvrete")
+            img#pauvrete.animated.rotateIn.ico(src="/asset/img/pictonb/pauvrete.png",title="Pauvreté et exclusion")
+        a(href="/list/sante")
+            img#sante.animated.rotateIn.ico(src="/asset/img/pictonb/sante.png",title="Santé et bien-être")
+        a(href="/list/travail")
+            img#travail.animated.rotateIn.ico(src="/asset/img/pictonb/travail.png",title="Travail décent")
+        a(href="/list/ville")
+            img#ville.animated.rotateIn.ico(src="/asset/img/pictonb/ville.png",title="Villes et communautés durables")
+    script.
+        $(".ico").mouseenter(function (evt, btn) {
+            $("#" + evt.currentTarget.id).animateCss('zoomIn');
+        });
 block content
     img(src='/asset/img/'+lien+'.png', alt="Logo categorie" class="mx-auto d-block")
     - var listOfDoc=list
@@ -31,6 +50,7 @@ block content
                         td=elt.nature
                         td=elt.datecreation
                         td
-                            a(href=elt.chemin) Télécharger
+                            a(href=elt.chemin) Télécharger &nbsp;
+                                i.fa.fa-download
                 else
                     tr Aucun document n'a encore été uploadé dans cette catégorie

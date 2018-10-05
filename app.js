@@ -7,16 +7,16 @@ const superagent = require('superagent')
 const sha=require('sha1')
 const session = require('express-session')
 var sess
-app.use(session({secret:'TokenAleaToire',connected:false}))
+app.use(session({secret:'TokenAleaToire',resave:true,saveUninitialized:true,connected:false}))
 var user=process.env.SMS_USER;
 var pass=process.env.SMS_PASS;
 
 function sendsms(content){
-	superagent.post('https://smsapi.free-mobile.fr/sendmsg')
-		.send({user:user,pass:pass,msg:content})
-		.end(function(err, res) {
+	// superagent.post('https://smsapi.free-mobile.fr/sendmsg')
+	// 	.send({user:user,pass:pass,msg:content})
+	// 	.end(function(err, res) {
 		console.log('Message envoyé le '+ new Date()+" evt = "+content )
-	});
+	// });
 }
 function getMysqlConnection(){
 	return  mysql.createConnection({
@@ -54,7 +54,7 @@ app.get('/partners', (req, res) => {
 	//sendsms('partners url hit')
     res.render(__dirname+ '/views/partners.pug',
 				{
-				widthValue:'10%',
+				widthValue:'15%',
 				titre:'Alter-Egaux : Partenaires'
 				}
 			)
@@ -75,7 +75,7 @@ app.get('/list/:categoryId', (req, res) => {
 					list:result,
 					titre:'Alter-Egaux : Liste '+param,
 					lien:param,
-					widthValue:'10%'})
+					widthValue:'15%'})
 			})
 		connection.end()
         }
@@ -84,7 +84,7 @@ app.get('/projet',(req,res)=>{
 	sendsms('projet url hit')
 	res.render(__dirname+ '/views/projet.pug',
 		{
-			widthValue:'10%',
+			widthValue:'15%',
 			//paddingvalue:"body {padding-top:5rem;}",
 			titre:'Alter-Egaux : Le projet'
 		}
@@ -95,16 +95,15 @@ app.get('/event',(req,res)=>{
 	connection=getMysqlConnection()
 	connection.connect()
 	let param=req.params.categoryId
-	let sqlQuery = 'select cheminminiature, cheminaffiche, libelle, lien  from evenement where true'
+	let sqlQuery = 'select cheminminiature, cheminaffiche,chemininvitation, libelle, lien  from evenement where true'
 	connection.query(sqlQuery,[param],function(err,result){
 		if(err) 
 			throw err
 		else
 			res.render(__dirname + '/views/event.pug', {
 				list:result,
-				widthValue: '10%',
-				//paddingvalue: "body {padding-top:5rem;}",
-				titre: 'Alter-Egaux : Evénements'
+				widthValue: '15%',
+ 				titre: 'Alter-Egaux : Evénements'
 			});
 	connection.end()
 		});
@@ -113,9 +112,17 @@ app.get('/histoire',(req,res)=>{
 	sendsms('histoire url hit')
 	res.render(__dirname+ '/views/histoire.pug',
 			{
-				widthValue:'10%',
-				//paddingvalue:"body {padding-top:5rem;}",
+				widthValue:'15%',
 				titre:'Alter-Egaux : Histoire'
+			}
+		);
+})
+app.get('/actions',(req,res)=>{
+	sendsms('actions url hit')
+	res.render(__dirname+ '/views/action.pug',
+			{
+				widthValue:'15%',
+				titre:'Alter-Egaux : Nos actions'
 			}
 		);
 })
@@ -131,8 +138,7 @@ app.get('/outils',(req,res)=>{
 			res.render(__dirname+ '/views/outils.pug',
 			{
 				list:result,
-				widthValue:'10%',
-				//paddingvalue:"body {padding-top:5rem;}",
+				widthValue:'15%',
 				titre:'Alter-Egaux : Outils de communication'
 			}
 		)
@@ -142,8 +148,17 @@ app.get('/outils',(req,res)=>{
 app.get('/',(req,res)=>{
 	res.render(__dirname+ '/index.pug',
 			{
-				widthValue:'20%',
-				//paddingvalue:"body {padding-top:5rem;}",
+				widthValue:'25%',
+
+				titre:'Alter-Egaux : Accueil'
+			}
+		);
+})
+app.get('/listtest',(req,res)=>{
+	res.render(__dirname+ '/views/list-test.pug',
+			{
+				widthValue:'25%',
+
 				titre:'Alter-Egaux : Accueil'
 			}
 		);
@@ -167,8 +182,8 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 							{
 								list:result,
 								token:token,
-								widthValue:'10%',
-								//paddingvalue:"body {padding-top:5rem;}",
+								widthValue:'15%',
+				
 								titre:'Alter-Egaux : Mise à jour outils'
 							})
 				})
@@ -187,8 +202,8 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 							{
 								list:result,
 								token:token,
-								widthValue:'10%',
-								//paddingvalue:"body {padding-top:5rem;}",
+								widthValue:'15%',
+				
 								titre:'Alter-Egaux : Mise à jour événements'
 							}
 						)
@@ -207,8 +222,8 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 							{
 								list:result,
 								token:token,
-								widthValue:'10%',
-								//paddingvalue:"body {padding-top:5rem;}",
+								widthValue:'15%',
+				
 								titre:'Alter-Egaux : Mise à jour docs odd'
 							}
 						)
@@ -227,8 +242,8 @@ app.get('/menu',(req,res)=>{
 	if(sess.connected){
 		res.render(__dirname+ '/views/menu.pug',
 					{
-						widthValue:'10%',
-						//paddingvalue:"body {padding-top:5rem;}",
+						widthValue:'15%',
+		
 						userlogin:sess.login,
 						titre:"Menu administrateur"
 					}
@@ -266,33 +281,33 @@ app.post('/addtool',(req,res)=>{
 	}
 })
 app.post('/adddocodd',(req,res)=>{
-	sess = req.session
-	if(sess.connected){
-		let ip = req.connection.remoteAddress.split(':')[3]
-		let token=sha(ip)
-		if (token==req.body.token){
-			connection=getMysqlConnection()
-			connection.connect()
-			let libelle=req.body.libelle
-			let nature=req.body.nature
-			let categorie=req.body.categorie
-			let miniature=req.body.miniature
-			let chemin=req.body.chemin
-			let lien=req.body.lien
-			let dateajout=new Date()
-			let sqlQuery = 'insert into document (categorie,libelle,nature,chemin,miniature,lienhttp,datereation,user) values (?,?,?,?,?,?,?,?)'
-			connection.query(sqlQuery,[categorie,libelle,nature,chemin,miniature,lien,dateajout,"admin"],function(err,result){
-				if(err) {
-					throw err
-				}
-				else{
-					res.redirect("/add/docodd")
-				}
-			})
-		}
-	}else{
-		res.redirect("/")
-	}
+	// sess = req.session
+	// if(sess.connected){
+	// 	let ip = req.connection.remoteAddress.split(':')[3]
+	// 	let token=sha(ip)
+	// 	if (token==req.body.token){
+	// 		connection=getMysqlConnection()
+	// 		connection.connect()
+	// 		let libelle=req.body.libelle
+	// 		let nature=req.body.nature
+	// 		let categorie=req.body.categorie
+	// 		let miniature=req.body.miniature
+	// 		let chemin=req.body.chemin
+	// 		let lien=req.body.lien
+	// 		let dateajout=new Date()
+	// 		let sqlQuery = 'insert into document (categorie,libelle,nature,chemin,miniature,lienhttp,datereation,user) values (?,?,?,?,?,?,?,?)'
+	// 		connection.query(sqlQuery,[categorie,libelle,nature,chemin,miniature,lien,dateajout,"admin"],function(err,result){
+	// 			if(err) {
+	// 				throw err
+	// 			}
+	// 			else{
+	// 				res.redirect("/add/docodd")
+	// 			}
+	// 		})
+	// 	}
+	// }else{
+	// 	res.redirect("/")
+	// }
 })
 app.post('/addevent',(req,res)=>{
 	sess = req.session
@@ -335,8 +350,8 @@ app.post('/auth',(req,res)=>{
 			sess.connected=true
 			res.render(__dirname+ '/views/menu.pug',
 					{
-						widthValue:'10%',
-						//paddingvalue:"body {padding-top:5rem;}",
+						widthValue:'15%',
+		
 						userlogin:loginadmin,
 						titre:"Menu administrateur"
 					}
