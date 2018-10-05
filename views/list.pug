@@ -3,8 +3,12 @@ block title
     title=titre
 block withoutContainer
     .container-fluid
-        h3(style="margin-top:30px") 17 objectifs pour sauver le monde
-        p Les objectifs de développement durable nous donnent la marche à suivre pour parvenir à un avenir meilleur et plus durable pour tous. Ils répondent aux défis mondiaux auxquels nous sommes confrontés, notamment ceux liés à la pauvreté, aux inégalités, au climat, à la dégradation de l’environnement, à la prospérité, à la paix et à la justice. Les objectifs sont interconnectés et, pour ne laisser personne de côté, il est important d’atteindre chacun d’entre eux, et chacune de leurs cibles, d’ici à 2030. Cliquez sur un objectif spécifique ci-dessous pour en savoir plus.
+        .blockquote
+            h3(style="margin-top:30px") 17 objectifs pour sauver le monde
+            p.mb-0 Les objectifs de développement durable nous donnent la marche à suivre pour parvenir à un avenir meilleur et plus durable pour tous. Ils répondent aux défis mondiaux auxquels nous sommes confrontés, notamment ceux liés à la pauvreté, aux inégalités, au climat, à la dégradation de l’environnement, à la prospérité, à la paix et à la justice. Les objectifs sont interconnectés et, pour ne laisser personne de côté, il est important d’atteindre chacun d’entre eux, et chacune de leurs cibles, d’ici à 2030. Cliquez sur un objectif spécifique ci-dessous pour en savoir plus.
+            footer.blockquote-footer
+                a(href="https://www.un.org/sustainabledevelopment/fr/objectifs-de-developpement-durable/") 
+                    cite Portail des Nations Unies sur les objectifs de développement durable
     .menu-list.text-center
         a(href="/list/education")
             img#education.animated.rotateIn.ico(src="/asset/img/pictonb/education.png",title="Education de qualité")
@@ -31,7 +35,7 @@ block withoutContainer
             $("#" + evt.currentTarget.id).animateCss('zoomIn');
         });
 block content
-    img(src='/asset/img/'+lien+'.png', alt="Logo categorie" class="mx-auto d-block")
+    img(id= lien,class="odd",src='/asset/img/oddonu/'+lien+'.PNG', alt="Logo objectif de développemet durable" class="mx-auto d-block",style="cursor:pointer;")
     - var listOfDoc=list
     .row
         table.table.table-stripped
@@ -54,3 +58,29 @@ block content
                                 i.fa.fa-download
                 else
                     tr Aucun document n'a encore été uploadé dans cette catégorie
+block javascript
+    script.
+        var oddUnLinks={
+            pauvrete:'https://www.un.org/sustainabledevelopment/fr/poverty/',
+            education:'https://www.un.org/sustainabledevelopment/fr/education/',
+            egalite:'https://www.un.org/sustainabledevelopment/fr/gender-equality/',
+            environnement:'https://www.un.org/sustainabledevelopment/fr/climate-change-2/',
+            faim:'https://www.un.org/sustainabledevelopment/fr/hunger/',
+            interculturel:'https://www.un.org/sustainabledevelopment/fr/globalpartnerships/',
+            paix:'https://www.un.org/sustainabledevelopment/fr/peace-justice/',
+            sante:'https://www.un.org/sustainabledevelopment/fr/health/',
+            travail:'https://www.un.org/sustainabledevelopment/fr/economic-growth/',
+            ville:'https://www.un.org/sustainabledevelopment/fr/cities/'
+            };
+
+        var lien = $('.odd').attr('id');
+            
+            //console.log(oddUnLinks[lien]);
+        //- $("#"+lien).click(function(){
+        //-         //location.href=oddUnLinks[lien];
+        //-         console.log("hit");
+        //-     });
+        $(".odd").click(function (evt, btn) {
+            //$("#" + evt.currentTarget.id).animateCss('zoomIn');
+            location.href=oddUnLinks[evt.currentTarget.id];
+        });
