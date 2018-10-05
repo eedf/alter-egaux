@@ -12,11 +12,11 @@ var user=process.env.SMS_USER;
 var pass=process.env.SMS_PASS;
 
 function sendsms(content){
-	// superagent.post('https://smsapi.free-mobile.fr/sendmsg')
-	// 	.send({user:user,pass:pass,msg:content})
-	// 	.end(function(err, res) {
+	superagent.post('https://smsapi.free-mobile.fr/sendmsg')
+	 	.send({user:user,pass:pass,msg:content})
+	 	.end(function(err, res) {
 		console.log('Message envoyé le '+ new Date()+" evt = "+content )
-	// });
+	});
 }
 function getMysqlConnection(){
 	return  mysql.createConnection({
