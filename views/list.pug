@@ -74,13 +74,6 @@ block javascript
             };
 
         var lien = $('.odd').attr('id');
-            
-            //console.log(oddUnLinks[lien]);
-        //- $("#"+lien).click(function(){
-        //-         //location.href=oddUnLinks[lien];
-        //-         console.log("hit");
-        //-     });
         $(".odd").click(function (evt, btn) {
-            //$("#" + evt.currentTarget.id).animateCss('zoomIn');
             location.href=oddUnLinks[evt.currentTarget.id];
         });

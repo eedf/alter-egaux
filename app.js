@@ -132,7 +132,7 @@ app.get('/outils',(req,res)=>{
 	connection.connect()
 	let sqlQuery = 'select libelle,description,lien,apercu,DATE_FORMAT(dateajout, "%d/%m/%Y")dateajout from outil where true'
 	connection.query(sqlQuery,function(err,result){
-		if(err) 
+		if(err)
 			throw err
 		else
 			res.render(__dirname+ '/views/outils.pug',
@@ -143,7 +143,6 @@ app.get('/outils',(req,res)=>{
 			}
 		)
 	})
-	
 })
 app.get('/',(req,res)=>{
 	res.render(__dirname+ '/index.pug',
@@ -183,7 +182,6 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								list:result,
 								token:token,
 								widthValue:'15%',
-				
 								titre:'Alter-Egaux : Mise à jour outils'
 							})
 				})
@@ -203,7 +201,6 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								list:result,
 								token:token,
 								widthValue:'15%',
-				
 								titre:'Alter-Egaux : Mise à jour événements'
 							}
 						)
@@ -223,7 +220,6 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								list:result,
 								token:token,
 								widthValue:'15%',
-				
 								titre:'Alter-Egaux : Mise à jour docs odd'
 							}
 						)
@@ -231,10 +227,9 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 			}
 		}
 		else
-		res.redirect("/menu")
-		
-	}else{
-		res.redirect("/")
+			res.redirect("/menu")
+		}else{
+			res.redirect("/")
 	}
 })
 app.get('/menu',(req,res)=>{
@@ -243,7 +238,6 @@ app.get('/menu',(req,res)=>{
 		res.render(__dirname+ '/views/menu.pug',
 					{
 						widthValue:'15%',
-		
 						userlogin:sess.login,
 						titre:"Menu administrateur"
 					}
@@ -344,14 +338,12 @@ app.post('/auth',(req,res)=>{
 	let passwordadmin=process.env.PASS_ADMIN
 	sendsms("Attempting Authentification as email = "+ req.body.email + " and pwd = "+req.body.password)
 	if(req.body.token===token && req.body.email===loginadmin && req.body.password===passwordadmin){
-			
 			sess = req.session
 			sess.login=loginadmin
 			sess.connected=true
 			res.render(__dirname+ '/views/menu.pug',
 					{
 						widthValue:'15%',
-		
 						userlogin:loginadmin,
 						titre:"Menu administrateur"
 					}
