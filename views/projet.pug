@@ -25,9 +25,8 @@ block content
                     li Une interface numérique dédiée à la dynamique Alter-Egaux
                     li Des équipes ressources pour alimenter les productions et faire vivre les événements
             .col-md-4
-                .rectangle(style="text-align:center;padding:40px;border: solid 1px;width:350;height:180;")
-                    i.fa.fa-youtube.fa-5x
-                .rectangle(style="text-align:center;padding:40px;border:solid 1px;width:350;height:180;")
+                #player
+                .rectangle(style="text-align:center;padding:40px;border:solid 1px;width:400;height:220;")
                     i.fa.fa-youtube.fa-5x
         .row
                 p.text-left ALTER-EGAUX est une aventure solidaire et citoyenne pour aller à la rencontre de l’autre et de soi. Une aventure pour apprendre à se découvrir et s’adapter, par-delà les frontières, proches ou lointaines, environnementales ou sociales. Ce projet vise à contribuer à l’éducation des enfants et jeunes par le développement de leur responsabilisation et de leur autonomie pour construire un réseau social, multiculturel, ancré dans le réel. C’est une démarche construite en 4 étapes qui permet une découverte progressive des thèmes proposés et des événements à vivre en fonction de l’âge, de l’intérêt, de l’autonomie de l’équipe ou du groupe.
@@ -37,3 +36,23 @@ block content
                     li Agir dans la communauté
                     li Valoriser ses actions
         img.img-fluid.img-responsive(src="/asset/img/projet/projet.png" style="position:relative;z-index:-5000;")
+block javascript
+    script.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '220',
+                width: '400',
+                videoId: '_qJF8L6l-Tw',
+                color:"white",
+                rel:"0",
+                showinfo:"0",
+                modestbranding:"1",
+            });
+        }
