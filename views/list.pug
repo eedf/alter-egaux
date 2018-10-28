@@ -58,7 +58,7 @@ block content
                                 i.fa.fa-download
                 else
                     tr Aucun document n'a encore été uploadé dans cette catégorie
-	
+    .addthis_inline_share_toolbox
     .vbuffer(style='height:200px')
 
 block javascript
@@ -80,3 +80,5 @@ block javascript
         $(".odd").click(function (evt, btn) {
             location.href=oddUnLinks[evt.currentTarget.id];
         });
+    script(type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bd5b3b3add96e74')
+
