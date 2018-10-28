@@ -73,7 +73,7 @@ app.get('/list/:categoryId', (req, res) => {
 			res.render(__dirname+ '/views/list.pug',
 					{
 					list:result,
-					titre:'Alter-Egaux : Liste '+param,
+					titre:'Alter-Egaux : Liste ODD '+param,
 					lien:param,
 					widthValue:'15%'})
 			})
