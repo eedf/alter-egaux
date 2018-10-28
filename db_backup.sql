@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `alteregaux`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `alteregaux` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `alteregaux`;
+
+--
 -- Table structure for table `document`
 --
 
@@ -33,7 +41,7 @@ CREATE TABLE `document` (
   `datereation` datetime DEFAULT NULL,
   `user` char(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +50,7 @@ CREATE TABLE `document` (
 
 LOCK TABLES `document` WRITE;
 /*!40000 ALTER TABLE `document` DISABLE KEYS */;
-INSERT INTO `document` VALUES (2,'Egalite','Livret mixicamp','Document PDF','/asset/docs/egalite/livret-mixicampV1.pdf','/asset/docs/egalite/livret-mixicampV1.png','/asset/docs/egalite/livret-mixicampV1.pdf','2018-08-09 00:00:00','yasser'),(3,'Sante','Revue éclés Routes Nouvelles n° 259','Document PDF','/asset/docs/sante/RN259_SANTE_ete2018_bd.pdf','/asset/docs/sante/RN259_SANTE_ete2018_bd.png','/asset/docs/sante/RN259_SANTE_ete2018_bd.pdf','2018-10-05 04:55:09','yasser');
+INSERT INTO `document` VALUES (2,'Egalite','Livret mixicamp','Document PDF','/asset/docs/egalite/livret-mixicampV1.pdf','/asset/docs/egalite/livret-mixicampV1.png','/asset/docs/egalite/livret-mixicampV1.pdf','2018-08-09 00:00:00','yasser'),(3,'Sante','Revue éclés Routes Nouvelles n° 259','Document PDF','/asset/docs/sante/RN259_SANTE_ete2018_bd.pdf','/asset/docs/sante/RN259_SANTE_ete2018_bd.png','/asset/docs/sante/RN259_SANTE_ete2018_bd.pdf','2018-10-05 04:55:09','yasser'),(4,'Environnement','Kit de projets environnementals & kit général','Fichier compressé','/asset/docs/environnement/KIT_ENVIRONNEMENT_&_KIT_GENERAL.zip',NULL,'/asset/docs/environnement/KIT_ENVIRONNEMENT_&_KIT_GENERAL.zip','2018-10-28 13:40:22','yasser'),(5,'Interculturel','Kit de projets interculturels & kit général','Fichier compressé','/asset/docs/interculturel/KIT_INTERCULTUREL_&_KIT_GENERAL.zip',NULL,'/asset/docs/interculturel/KIT_INTERCULTUREL_&_KIT_GENERAL.zip','2018-10-28 13:42:25','yasser');
 /*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,4 +121,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-05  6:08:37
+-- Dump completed on 2018-10-28 13:53:23
