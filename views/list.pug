@@ -39,29 +39,31 @@ block content
     - var listOfDoc=list
     .row
         table.table.table-stripped
-            thead
-                th #
-                th Libellé du document
-                th Nature du document
-                th Date de publication
-                th Lien
+            thead.thead-dark
+                th Document
+                th Libellé
+                th Description
             tbody
                 - var i=0
                 each elt in list
                     tr
-                        td= ++i
-                        td=elt.libelle
-                        td=elt.nature
-                        td=elt.datecreation
-                        td
-                            a(href=elt.chemin) Télécharger &nbsp;
-                                i.fa.fa-download
+                        td(width="182px")
+                            a(href=elt.chemin)
+                                img.img-fluid(src=elt.miniature, width="182px")
+                        td(width="182px") #{elt.libelle}
+                        td(width="400px")
+                            ul.list-unstyled
+                                li.list-group-item.list-group-item-info Date de mise en ligne : #{elt.datecreation}
+                                li.list-group-item.list-group-item-warning Type de fichier : #{elt.nature}
+                                li.list-group-item 
+                                    a(href=elt.chemin) Télécharger &nbsp;
+                                        i.fa.fa-download
                 else
                     tr Aucun document n'a encore été uploadé dans cette catégorie
-    .addthis_inline_share_toolbox
-    .vbuffer(style='height:200px')
-
+        .addthis_inline_share_toolbox
+        .vbuffer(style="height:200px")
 block javascript
+    script(src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bd5b3b3add96e74")
     script.
         var oddUnLinks={
             pauvrete:'https://www.un.org/sustainabledevelopment/fr/poverty/',
@@ -80,5 +82,3 @@ block javascript
         $(".odd").click(function (evt, btn) {
             location.href=oddUnLinks[evt.currentTarget.id];
         });
-    script(type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bd5b3b3add96e74')
-

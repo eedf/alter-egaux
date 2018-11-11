@@ -65,7 +65,7 @@ app.get('/list/:categoryId', (req, res) => {
 		connection=getMysqlConnection()
 		connection.connect()
 		let param=req.params.categoryId
-		let sqlQuery = 'select id, libelle,nature,chemin,lienhttp, DATE_FORMAT(datereation, "%d/%m/%Y")datecreation  from document where categorie=? and true'
+		let sqlQuery = 'select id, libelle,nature,miniature,chemin,lienhttp, DATE_FORMAT(datereation, "%d/%m/%Y")datecreation  from document where categorie=? and true'
 		connection.query(sqlQuery,[param],function(err,result){
 		if(err) 
 			throw err
