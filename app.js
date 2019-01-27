@@ -336,7 +336,10 @@ app.post('/auth',(req,res)=>{
 	let token=sha(ip)
 	let loginadmin=process.env.LOGIN_ADMIN
 	let passwordadmin=process.env.PASS_ADMIN
-	sendsms("Attempting Authentification as email = "+ req.body.email + " and pwd = "+req.body.password)
+	//sendsms("Attempting Authentification as email = "+ req.body.email + " and pwd = "+req.body.password)
+	console.log(loginadmin," ",passwordadmin)
+	console.log("Attempting Authentification as email = "+ req.body.email + " and pwd = "+req.body.password)
+
 	if(req.body.token===token && req.body.email===loginadmin && req.body.password===passwordadmin){
 			sess = req.session
 			sess.login=loginadmin
@@ -348,7 +351,8 @@ app.post('/auth',(req,res)=>{
 						titre:"Menu administrateur"
 					}
 			)
-		}
+		}else{res.redirect('/')}
+
 })
 app.get('/logout',(req,res)=>{
 	sendsms("logout reached")
