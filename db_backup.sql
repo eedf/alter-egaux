@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.34-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.38-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: alteregaux
 -- ------------------------------------------------------
--- Server version	10.1.34-MariaDB-0ubuntu0.18.04.1
+-- Server version	10.1.38-MariaDB-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,35 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `action`
+--
+
+DROP TABLE IF EXISTS `action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `action` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `groupename` varchar(50) DEFAULT NULL,
+  `branche` varchar(50) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `lieu` varchar(50) DEFAULT NULL,
+  `partenaires` varchar(50) DEFAULT NULL,
+  `contact` varchar(50) DEFAULT NULL,
+  `photo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `action`
+--
+
+LOCK TABLES `action` WRITE;
+/*!40000 ALTER TABLE `action` DISABLE KEYS */;
+/*!40000 ALTER TABLE `action` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `document`
@@ -42,7 +71,7 @@ CREATE TABLE `document` (
 
 LOCK TABLES `document` WRITE;
 /*!40000 ALTER TABLE `document` DISABLE KEYS */;
-INSERT INTO `document` VALUES (2,'Egalite','Livret mixicamp','Document PDF','/asset/docs/egalite/livret-mixicampV1.pdf','/asset/docs/egalite/livret-mixicampV1.png','/asset/docs/egalite/livret-mixicampV1.pdf','2018-08-09 00:00:00','yasser'),(3,'Sante','Revue éclés Routes Nouvelles n° 259','Document PDF','/asset/docs/sante/RN259_SANTE_ete2018_bd.pdf','/asset/docs/sante/RN259_SANTE_ete2018_bd.png','/asset/docs/sante/RN259_SANTE_ete2018_bd.pdf','2018-10-05 04:55:09','yasser'),(4,'Environnement','Kit de projets environnementals','Document PDF','/asset/docs/environnement/KIT_ENVIRONNEMENT.pdf','/asset/docs/environnement/KIT_ENVIRONNEMENT.png','/asset/docs/environnement/KIT_ENVIRONNEMENT_&_KIT_GENERAL.zip','2018-10-28 13:40:22','yasser'),(5,'Interculturel','Kit de projets interculturels','Document PDF','/asset/docs/interculturel/KIT_INTERCULTUREL.pdf','/asset/docs/interculturel/KIT_INTERCULTUREL.png','/asset/docs/interculturel/KIT_INTERCULTUREL_&_KIT_GENERAL.zip','2018-10-28 13:42:25','yasser'),(6,'Environnement','Kit général','Document PDF','/asset/docs/KIT_GENERAL.pdf','/asset/docs/KIT_GENERAL.png',NULL,'2018-11-11 21:24:36','yasser'),(7,'Interculturel','Kit général','Document PDF','/asset/docs/KIT_GENERAL.pdf','/asset/docs/KIT_GENERAL.png',NULL,'2018-11-11 21:25:01','yasser');
+INSERT INTO `document` VALUES (2,'Egalite','Livret mixicamp','Document PDF','/docs/egalite/livret-mixicampV1.pdf','/docs/egalite/livret-mixicampV1.png','/docs/egalite/livret-mixicampV1.pdf','2018-08-09 00:00:00','yasser'),(3,'Sante','Revue éclés Routes Nouvelles n° 259','Document PDF','/docs/sante/RN259_SANTE_ete2018_bd.pdf','/docs/sante/RN259_SANTE_ete2018_bd.png','/docs/sante/RN259_SANTE_ete2018_bd.pdf','2018-10-05 04:55:09','yasser'),(4,'Environnement','Kit de projets environnementals','Document PDF','/docs/environnement/KIT_ENVIRONNEMENT.pdf','/docs/environnement/KIT_ENVIRONNEMENT.png','/docs/environnement/KIT_ENVIRONNEMENT_&_KIT_GENERAL.zip','2018-10-28 13:40:22','yasser'),(5,'Interculturel','Kit de projets interculturels','Document PDF','/docs/interculturel/KIT_INTERCULTUREL.pdf','/docs/interculturel/KIT_INTERCULTUREL.png','/docs/interculturel/KIT_INTERCULTUREL_&_KIT_GENERAL.zip','2018-10-28 13:42:25','yasser'),(6,'Environnement','Kit général','Document PDF','/docs/KIT_GENERAL.pdf','/docs/KIT_GENERAL.png',NULL,'2018-11-11 21:24:36','yasser'),(7,'Interculturel','Kit général','Document PDF','/docs/KIT_GENERAL.pdf','/docs/KIT_GENERAL.png',NULL,'2018-11-11 21:25:01','yasser');
 /*!40000 ALTER TABLE `document` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +101,7 @@ CREATE TABLE `evenement` (
 
 LOCK TABLES `evenement` WRITE;
 /*!40000 ALTER TABLE `evenement` DISABLE KEYS */;
-INSERT INTO `evenement` VALUES (1,'Nuit de la belle étoile','Passer une nuit en groupe pour admirer le ciel illuminé par les étoiles','/asset/docs/evenements/guide/nbe_guide.pdf','nbe_min.png','/asset/docs/evenements/affiche/nbe_affiche.pdf','/asset/docs/evenements/invitation/Invitation nuit belle etoile.pdf',NULL),(2,'Journée trapeur','Journée trapeur','/asset/docs/evenements/guide/jt_guide.pdf','jt_min.png','/asset/docs/evenements/affiche/jt_affiche.pdf','/asset/docs/evenements/invitation/Invitation journée trappeur.pdf',NULL),(3,'Journée curiosité','Journée curiosité','/asset/docs/evenements/guide/jc_guide.pdf','jc_min.png','/asset/docs/evenements/affiche/jc_affiche.pdf','/asset/docs/evenements/invitation/Invitation journée curiosité.pdf',NULL),(4,'Guide rentrée 2018','Guide rentrée 2018','/asset/docs/evenements/guide/jr_guide.pdf','afficherentree.png','/asset/docs/evenements/affiche/jr_affiche.pdf','/asset/docs/evenements/invitation/Invitation Rentree2018.pdf',NULL);
+INSERT INTO `evenement` VALUES (1,'Nuit de la belle étoile','Passer une nuit en groupe pour admirer le ciel illuminé par les étoiles','/docs/evenements/guide/nbe_guide.pdf','nbe_min.png','/docs/evenements/affiche/nbe_affiche.pdf','/docs/evenements/invitation/Invitation nuit belle etoile.pdf',NULL),(2,'Journée trapeur','Journée trapeur','/docs/evenements/guide/jt_guide.pdf','jt_min.png','/docs/evenements/affiche/jt_affiche.pdf','/docs/evenements/invitation/Invitation journée trappeur.pdf',NULL),(3,'Journée curiosité','Journée curiosité','/docs/evenements/guide/jc_guide.pdf','jc_min.png','/docs/evenements/affiche/jc_affiche.pdf','/docs/evenements/invitation/Invitation journée curiosité.pdf',NULL),(4,'Guide rentrée 2018','Guide rentrée 2018','/docs/evenements/guide/jr_guide.pdf','afficherentree.png','/docs/evenements/affiche/jr_affiche.pdf','/docs/evenements/invitation/Invitation Rentree2018.pdf',NULL);
 /*!40000 ALTER TABLE `evenement` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +120,7 @@ CREATE TABLE `outil` (
   `dateajout` datetime DEFAULT NULL,
   `lien` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-11 22:05:42
+-- Dump completed on 2019-02-23 14:44:48
