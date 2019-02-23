@@ -6,6 +6,9 @@ const mysql = require('mysql')
 const superagent = require('superagent')
 const sha=require('sha1')
 const session = require('express-session')
+var repo='/actionpics/'
+var formidable = require('formidable');
+var fs = require('fs');
 var sess
 app.use(session({secret:'TokenAleaToire',resave:true,saveUninitialized:true,connected:false}))
 var user=process.env.SMS_USER;
@@ -26,7 +29,7 @@ function getMysqlConnection(){
 		database:process.env.DB_NAME})
 }
 
-app.use(express.static(__dirname))
+app.use('/',express.static(__dirname+'/asset'))
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -43,6 +46,31 @@ app.use(function (req, res, next) {
 })
 app.use(helmet())
 
+
+app.get('/form',function(req,res){
+	res.render(__dirname+ '/views/fileform.pug',
+				{
+				widthValue:'15%',
+				titre:'Alter-Egaux : Formulaire'
+				}
+			)
+})
+app.post('/fileupload',function (req, res) {
+	var form = new formidable.IncomingForm();
+	form.parse(req, function (err, fields, files) {
+	      	var oldpath = files.filetoupload.path;
+      		var newpath = __dirname + repo + files.filetoupload.name;
+      		fs.rename(oldpath, newpath, function (err) {
+        		if (err){
+					res.sendStatus(500);
+					throw err;
+				
+				}
+				else 
+					res.sendStatus(200);
+      		});
+	});
+})
 
 app.get('/login', (req, res) => {
 	sendsms("Login form reached")
@@ -119,12 +147,12 @@ app.get('/histoire',(req,res)=>{
 })
 app.get('/actions',(req,res)=>{
 	sendsms('actions url hit')
-	res.render(__dirname+ '/views/action.pug',
-			{
+	res.render(__dirname+ '/views/fileform.pug',
+				{
 				widthValue:'15%',
 				titre:'Alter-Egaux : Nos actions'
-			}
-		);
+				}
+			)
 })
 app.get('/outils',(req,res)=>{
 	sendsms('outils url hit')
@@ -148,7 +176,6 @@ app.get('/',(req,res)=>{
 	res.render(__dirname+ '/index.pug',
 			{
 				widthValue:'25%',
-
 				titre:'Alter-Egaux : Accueil'
 			}
 		);

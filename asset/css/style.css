@@ -42,11 +42,11 @@ h5{
 
 @font-face {
     font-family: TrashHand;
-    src: url('/asset/fonts/Titre/TrashHand.TTF');
+    src: url('/fonts/Titre/TrashHand.TTF');
 }
 @font-face {
     font-family: CalibreRegular;
-    src: url('/asset/fonts/Calibre-Regular.otf');
+    src: url('/fonts/Calibre-Regular.otf');
 }
 .blockquote{
     font-family: TrashHand;

@@ -6,19 +6,19 @@ block content
         h3 Les personnages :
     ul.list-inline
         li.list-inline-item
-            img.animated.bounceInUp(src="/asset/img/personnages/carlos.jpg",id="a")
+            img.animated.bounceInUp(src="/img/personnages/carlos.jpg",id="a")
         li.list-inline-item
-            img.animated.bounceInDown(src="/asset/img/personnages/eugenie.jpg", id="b")
+            img.animated.bounceInDown(src="/img/personnages/eugenie.jpg", id="b")
         li.list-inline-item
-            img.animated.bounceInUp(src="/asset/img/personnages/idriss.jpg", id="c")
+            img.animated.bounceInUp(src="/img/personnages/idriss.jpg", id="c")
         li.list-inline-item
-            img.animated.bounceInDown(src="/asset/img/personnages/nino.jpg", id="d")
+            img.animated.bounceInDown(src="/img/personnages/nino.jpg", id="d")
         li.list-inline-item
-            img.animated.bounceInUp(src="/asset/img/personnages/odile.jpg", id="e")
+            img.animated.bounceInUp(src="/img/personnages/odile.jpg", id="e")
         li.list-inline-item
-            img.animated.bounceInDown(src="/asset/img/personnages/thea.jpg", id="f")
+            img.animated.bounceInDown(src="/img/personnages/thea.jpg", id="f")
         li.list-inline-item
-            img.animated.bounceInUp(src="/asset/img/personnages/yakou.jpg", id="g")
+            img.animated.bounceInUp(src="/img/personnages/yakou.jpg", id="g")
     p.alert.alert-info Passer la souris sur un personnage pour voir sa description
     h3 Télécharger les dernières épisodes de l'histoire de nos personnages
     .modal.fade(tabindex='-1', role='dialog', id="ep1")
@@ -29,10 +29,10 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    img(src="/asset/img/thumbnails/ep1.jpg", alt="")
+                    img(src="/img/thumbnails/ep1.jpg", alt="")
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
-                    a.btn.btn-success(href="/asset/docs/histoires/episode1.pdf") Télécharger
+                    a.btn.btn-success(href="/docs/histoires/episode1.pdf") Télécharger
                         i.fa.fa-download
     .modal.fade(tabindex='-1', role='dialog', id="ep2")
         .modal-dialog(role='document')
@@ -42,10 +42,10 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    img(src="/asset/img/thumbnails/ep2.jpg", alt="")
+                    img(src="/img/thumbnails/ep2.jpg", alt="")
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
-                    a.btn.btn-success(href="/asset/docs/histoires/episode2.pdf") Télécharger
+                    a.btn.btn-success(href="/docs/histoires/episode2.pdf") Télécharger
                         i.fa.fa-download
     .modal.fade(tabindex='-1', role='dialog', id="ep3")
         .modal-dialog(role='document')
@@ -55,10 +55,10 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    img(src="/asset/img/thumbnails/ep3.jpg", alt="")
+                    img(src="/img/thumbnails/ep3.jpg", alt="")
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
-                    a.btn.btn-success(href="/asset/docs/histoires/episode3.pdf") Télécharger
+                    a.btn.btn-success(href="/docs/histoires/episode3.pdf") Télécharger
                         i.fa.fa-download
     table.table.stripped
         thead
@@ -72,27 +72,27 @@ block content
                 td L'objet mystérieux
                 td
                     a(data-toggle='modal', data-target='#ep1', style="cursor:zoom-in;")
-                        img.img-thumbnail(src="/asset/img/thumbnails/ep1.jpg", alt="" width="20%")
+                        img.img-thumbnail(src="/img/thumbnails/ep1.jpg", alt="" width="20%")
                 td 
-                    a.btn.btn-info(href="/asset/docs/histoires/episode1.pdf")
+                    a.btn.btn-info(href="/docs/histoires/episode1.pdf")
                         i.fa.fa-download
             tr
                 td 2
                 td L'été du Nynom
                 td
                     a(data-toggle='modal', data-target='#ep2', style="cursor:zoom-in;")
-                        img.img-thumbnail(src="/asset/img/thumbnails/ep2.jpg", alt="", width="20%")
+                        img.img-thumbnail(src="/img/thumbnails/ep2.jpg", alt="", width="20%")
                 td
-                    a.btn.btn-info(href="/asset/docs/histoires/episode2.pdf")
+                    a.btn.btn-info(href="/docs/histoires/episode2.pdf")
                         i.fa.fa-download
             tr
                 td 3
                 td Des retrouvailles étonnantes
                 td
                     a(data-toggle='modal', data-target='#ep3', style="cursor:zoom-in;")
-                        img.img-thumbnail(src="/asset/img/thumbnails/ep3.jpg", alt="", width="20%")
+                        img.img-thumbnail(src="/img/thumbnails/ep3.jpg", alt="", width="20%")
                 td
-                    a.btn.btn-info(href="/asset/docs/histoires/episode3.pdf")
+                    a.btn.btn-info(href="/docs/histoires/episode3.pdf")
                         i.fa.fa-download
     script.
         $("img").mouseenter(function (evt, btn) {

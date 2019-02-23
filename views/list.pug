@@ -11,31 +11,31 @@ block withoutContainer
                     cite Portail des Nations Unies sur les objectifs de développement durable
     .menu-list.text-center
         a(href="/list/education")
-            img#education.animated.rotateIn.ico(src="/asset/img/pictonb/education.png",title="Education de qualité")
+            img#education.animated.rotateIn.ico(src="/img/pictonb/education.png",title="Education de qualité")
         a(href="/list/egalite")
-            img#egalite.animated.rotateIn.ico(src="/asset/img/pictonb/egalite.png",title="Egalité des genres")
+            img#egalite.animated.rotateIn.ico(src="/img/pictonb/egalite.png",title="Egalité des genres")
         a(href="/list/environnement")
-            img#environnement.animated.rotateIn.ico(src="/asset/img/pictonb/environnement.png",title="Environnement et écocitoyenneté")
+            img#environnement.animated.rotateIn.ico(src="/img/pictonb/environnement.png",title="Environnement et écocitoyenneté")
         a(href="/list/faim")
-            img#faim.animated.rotateIn.ico(src="/asset/img/pictonb/faim.png",title="Faim et alimentation saine")
+            img#faim.animated.rotateIn.ico(src="/img/pictonb/faim.png",title="Faim et alimentation saine")
         a(href="/list/interculturel")
-            img#inter.animated.rotateIn.ico(src="/asset/img/pictonb/interculturel.png",title="Interculturel et rencontre de l'autre")
+            img#inter.animated.rotateIn.ico(src="/img/pictonb/interculturel.png",title="Interculturel et rencontre de l'autre")
         a(href="/list/paix")
-            img#paix.animated.rotateIn.ico(src="/asset/img/pictonb/paix.png",title="Construction de la paix")
+            img#paix.animated.rotateIn.ico(src="/img/pictonb/paix.png",title="Construction de la paix")
         a(href="/list/pauvrete")
-            img#pauvrete.animated.rotateIn.ico(src="/asset/img/pictonb/pauvrete.png",title="Pauvreté et exclusion")
+            img#pauvrete.animated.rotateIn.ico(src="/img/pictonb/pauvrete.png",title="Pauvreté et exclusion")
         a(href="/list/sante")
-            img#sante.animated.rotateIn.ico(src="/asset/img/pictonb/sante.png",title="Santé et bien-être")
+            img#sante.animated.rotateIn.ico(src="/img/pictonb/sante.png",title="Santé et bien-être")
         a(href="/list/travail")
-            img#travail.animated.rotateIn.ico(src="/asset/img/pictonb/travail.png",title="Travail décent")
+            img#travail.animated.rotateIn.ico(src="/img/pictonb/travail.png",title="Travail décent")
         a(href="/list/ville")
-            img#ville.animated.rotateIn.ico(src="/asset/img/pictonb/ville.png",title="Villes et communautés durables")
+            img#ville.animated.rotateIn.ico(src="/img/pictonb/ville.png",title="Villes et communautés durables")
     script.
         $(".ico").mouseenter(function (evt, btn) {
             $("#" + evt.currentTarget.id).animateCss('zoomIn');
         });
 block content
-    img(id= lien,class="odd",src='/asset/img/oddonu/'+lien+'.PNG', alt="Logo objectif de développemet durable" class="mx-auto d-block",style="cursor:pointer;")
+    img(id= lien,class="odd",src='/img/oddonu/'+lien+'.PNG', alt="Logo objectif de développemet durable" class="mx-auto d-block",style="cursor:pointer;")
     - var listOfDoc=list
     .row
         table.table.table-stripped
