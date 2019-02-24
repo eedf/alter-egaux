@@ -6,7 +6,7 @@ const mysql = require('mysql')
 const superagent = require('superagent')
 const sha=require('sha1')
 const session = require('express-session')
-var repo='/actionpics/'
+var repo='/asset/actionpics/'
 var formidable = require('formidable');
 var fs = require('fs');
 var sess
@@ -15,11 +15,11 @@ var user=process.env.SMS_USER;
 var pass=process.env.SMS_PASS;
 
 function sendsms(content){
-	superagent.post('https://smsapi.free-mobile.fr/sendmsg')
+	/**superagent.post('https://smsapi.free-mobile.fr/sendmsg')
 	 	.send({user:user,pass:pass,msg:content})
 	 	.end(function(err, res) {
 		console.log('Message envoyé le '+ new Date()+" evt = "+content )
-	});
+	});**/
 }
 function getMysqlConnection(){
 	return  mysql.createConnection({
@@ -54,6 +54,33 @@ app.get('/form',function(req,res){
 				titre:'Alter-Egaux : Formulaire'
 				}
 			)
+})
+app.post('/addaction',function (req, res) {
+	/*connection=getMysqlConnection()
+	connection.connect()*/
+	console.log(req.body)
+	/*
+	let groupename=escape(req.body.groupname)
+	let branche=escape(req.body.branche)
+	let descprojet=escape(req.body.descprojet)
+	let lieu=escape(req.body.lieu)
+	let partenaires=escape(req.body.partenaires)
+	let contactmail=escape(req.body.contactmail)
+	let filename=escape(req.body.filename)
+	let dateajout=new Date()
+	let token=req.connection.remoteAddress.split(':')[3]
+	
+	
+	let sqlQuery = 'insert into action (groupename,branche,description,lieu,partenaires,contact,photo,datajout,ipaddress) values (?,?,?,?,?,?,?,?,?)'
+	connection.query(sqlQuery,[groupename,branche,descprojet,lieu,partenaires,contactmail,filename,dateajout,token],function(err,result){
+		if(err) {
+			throw err
+		}
+		else{
+			res.sendStatus(200);
+		}
+	})
+*/
 })
 app.post('/fileupload',function (req, res) {
 	var form = new formidable.IncomingForm();

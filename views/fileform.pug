@@ -1,38 +1,76 @@
 extends layout.pug
 block title
-    title=titre
-block content
-    style=paddingvalue
-    h3 Envoyer d'abord une image représentative
+  title=titre
+block withoutContainer
+  style=paddingvalue
+  .container-fluid
+    .modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', id="addaction")
+      .modal-dialog.modal-lg(role='document')
+        .modal-content
+          .modal-header
+            h5.modal-title Décrire votre action alteregaux
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') X
+          .modal-body
+            .container-fluid
+              .row
+                form#descriptionaction.col-md-12
+                  label(for="groupname") Nom de groupe
+                  input.form-control(type="text" name="libelle" id="groupname" required)
+                  label(for="branche") Tranche d'âge / branche
+                  input.form-control(type="text" name="branche" id="branche" required)
+                  label(for="descprojet") Description du projet
+                  textarea.form-control(cols="30", rows="3" name="descprojet" id="descprojet" required)
+                  label(for="lieu") Lieu
+                  input.form-control(type="text" name="lieu" id="lieu" required)
+                  label(for="partenaires") Partenaires
+                  input.form-control(type="text" name="partenaires" id="partenaires" required)
+                  label(for="contactmail") Contact (mail)
+                  input.form-control(type="mail" name="contactmail" id="contactmail" required)
+              .row
+                .col-md-6
+                  form#fileform(enctype='multipart/form-data')
+                    label(for="groupname") Sélectionner une photo pertinente et Cliquer sur Upload
+                    input.form-control-file(type='file', name='filetoupload', accept='image/x-png,image/gif,image/jpeg')
+                    input#upload.btn.btn-primary(type='button', value='Upload',hidden=false)
+                    
+                .col-md-6
+                  progress.progress.progress-bar-striped.progress-bar-animated(value='0', max='100' hidden=true)
+                  img#preview(src='', width='100px', hidden=true)
+            .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
+                button#sauvegarder.btn.btn-primary(type="button") Enregistrer &nbsp;
+                  i.fa.fa-save 
+                button#reset.btn.btn-success(type="reset") Effacer &nbsp;
+                  i.fa.fa-recycle
+    .alert.alert-info
+      .text-right
+        a.btn.btn-warning(data-toggle='modal', data-target='#addaction') Déposer un projet
+
+    h3 Liste des actions :
     .row
-      .col-md-6
-        form#fileform(enctype='multipart/form-data')
-          input.form-control-file(type='file', name='filetoupload', accept='image/x-png,image/gif,image/jpeg')
-          br
-          input#upload.btn.btn-primary(type='button', value='Upload')
-          img#preview(src='', width='100px')
-      .col-md-6
-        progress.progress(value='0', max='100')
-        img#preview(src='', width='100px', hidden='') 
-    h3 Décrire votre action sur ce formulaire :
-    .row
-      form#descriptionaction(action="" method="POST")
-        input(name="token" hidden value=token)   
-        label(for="groupname") Nom de groupe
-        input.form-control(type="text" name="libelle" id="groupname" required)
-        label(for="branche") Tranche d'âge / branche
-        input.form-control(type="text" name="branche" id="branche" required)
-        label(for="descprojet") Description du projet
-        textarea.form-control(cols="30", rows="10" name="descprojet" id="descprojet" required)
-        label(for="lieu") Lieu
-        input.form-control(type="text" name="lieu" id="lieu" required)
-        label(for="partenaires") Partenaires
-        input.form-control(type="text" name="partenaires" id="partenaires" required)
-        label(for="contactmail") Contact (mail)
-        input.form-control(type="mail" name="contactmail" id="contactmail" required)
-        button.btn.btn-primary(type="button") Enregistrer &nbsp;
-            i.fa.fa-save 
-        button.btn.btn-success(type="reset") Effacer &nbsp;
-            i.fa.fa-recycle 
-block javascript
-  script(src='/js/scriptfileupload.js')
+      .col-md-3
+        <img src="https://via.placeholder.com/300" alt="300px" class="rounded-0">
+      .col-md-3
+        ul.list
+          li Nom groupe
+          li Tranche d'age / Branche
+          li Description
+          li Lieu
+          li Partenaires
+          li contact (mail)
+          li Ajouté le :
+      .col-md-3
+        <img src="https://via.placeholder.com/300" alt="300px" class="rounded-0">
+      .col-md-3
+        ul
+          li Nom groupe
+          li Tranche d'age / Branche
+          li Description
+          li Lieu
+          li Partenaires
+          li contact (mail)
+          li Ajouté le :
+
+  block javascript
+    script(src='/js/scriptfileupload.js')
