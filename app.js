@@ -56,10 +56,10 @@ app.get('/form',function(req,res){
 			)
 })
 app.post('/addaction',function (req, res) {
-	/*connection=getMysqlConnection()
-	connection.connect()*/
+	connection=getMysqlConnection()
+	connection.connect()
 	console.log(req.body)
-	/*
+	
 	let groupename=escape(req.body.groupname)
 	let branche=escape(req.body.branche)
 	let descprojet=escape(req.body.descprojet)
@@ -80,7 +80,7 @@ app.post('/addaction',function (req, res) {
 			res.sendStatus(200);
 		}
 	})
-*/
+
 })
 app.post('/fileupload',function (req, res) {
 	var form = new formidable.IncomingForm();

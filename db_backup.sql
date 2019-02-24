@@ -31,6 +31,8 @@ CREATE TABLE `action` (
   `partenaires` varchar(50) DEFAULT NULL,
   `contact` varchar(50) DEFAULT NULL,
   `photo` varchar(50) DEFAULT NULL,
+  `datajout` datetime DEFAULT NULL,
+  `ipaddress` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -142,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-23 14:44:48
+-- Dump completed on 2019-02-24  7:08:43

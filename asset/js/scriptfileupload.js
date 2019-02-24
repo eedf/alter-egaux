@@ -10,34 +10,40 @@ $(':file').on('change', function() {
 	$("progress").attr("hidden",false);
 	$("#upload").attr("hidden",false);
 });
-
-$('#upload').on('click', function() {
-	document.querySelector("progress").value =50 ;
-	ajax(new FormData(document.getElementById("fileform")),'fileupload',true);
-	/*$.post('fileupload',new FormData(document.getElementById("fileform")),function(answer){
-		document.querySelector("progress").value =100 ;
+var uploadhit=false;
+$('#upload').on('click', function() {	
+	if(!uploadhit){
+		var intervalID;
+		ajax(new FormData(document.getElementById("fileform")),'fileupload',true);
+		intervalID=setInterval(function(){
+			if(document.querySelector("progress").value==100){
+				clearInterval(intervalID);
+			}else{
+				document.querySelector("progress").value +=25 ;
+			}
+		},1000);
+		//document.querySelector("progress").value =100 ;
 		$("progress").attr("hidden",true);
 		$("#preview").attr("src","actionpics/"+filename);
 		$("#preview").attr("hidden",false);
 		$("#upload").attr("hidden",true);
-	});*/
-	document.querySelector("progress").value = 0;
+		document.querySelector("progress").value = 0;
+		uploadhit=true;
+	}
 });
-$('#sauvegarder').click(function() {
-	var data={};
-	jQuery.each( $("#descriptionaction").serializeArray(), function( i, field ) {
-		data[field.name]= field.value;
-	});
-	console.log(data);
-	/*data["filename"]=filename;
-	//ajax(data,'addaction',true);
-	$.post("addaction",data,function(answer){
-		alert("Projet déposé avec succés, un modérateur vérifiera les informations avant de les publier");
-	});
-	/*$("#fileform")[0].reset();
-	$("#descriptionaction")[0].reset();
-	$("#preview").attr("hidden","true");*/
-	
+var savehit=false;
+$("button[name='sauvegarder']").on("click",function() {
+	if(!savehit){
+		var data={};
+		jQuery.each( $("#descriptionaction").serializeArray(), function( i, field ) {
+			data[field.name]= field.value;
+		});
+		data["filename"]=filename;
+		$.post("addaction",data,function(answer){
+			alert("Projet déposé avec succés, un modérateur vérifiera les informations avant de les publier");
+		});
+		savehit=true;
+	}
 });
 
 
@@ -60,7 +66,7 @@ function ajax(data,url,async){
 		//document.querySelector("progress").value =25 ;
 		console.log(xhr.status);
 		if (xhr.status == 200) {
-			console.log("Envoyé avec succés");
+			console.log("reçu avec succés");
     	} else {
       		console.log("Erreur " + xhr.status + " lors de la tentative d’envoi du fichier.<br \/>");
     	}
@@ -69,7 +75,12 @@ function ajax(data,url,async){
 }
 
 $("#reset").on("click",function(){
+	reset();
+});
+function reset(){
 	$("#fileform")[0].reset();
 	$("#descriptionaction")[0].reset();
 	$("#preview").attr("hidden","true");
-});
+	uploadhit=true;
+	savehit=true;
+}

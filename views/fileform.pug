@@ -16,7 +16,7 @@ block withoutContainer
               .row
                 form#descriptionaction.col-md-12
                   label(for="groupname") Nom de groupe
-                  input.form-control(type="text" name="libelle" id="groupname" required)
+                  input.form-control(type="text" name="groupname" id="groupname" required)
                   label(for="branche") Tranche d'âge / branche
                   input.form-control(type="text" name="branche" id="branche" required)
                   label(for="descprojet") Description du projet
@@ -30,7 +30,7 @@ block withoutContainer
               .row
                 .col-md-6
                   form#fileform(enctype='multipart/form-data')
-                    label(for="groupname") Sélectionner une photo pertinente et Cliquer sur Upload
+                    label(for="filetoupload") Sélectionner une photo pertinente et Cliquer sur Upload
                     input.form-control-file(type='file', name='filetoupload', accept='image/x-png,image/gif,image/jpeg')
                     input#upload.btn.btn-primary(type='button', value='Upload',hidden=false)
                     
@@ -38,10 +38,10 @@ block withoutContainer
                   progress.progress.progress-bar-striped.progress-bar-animated(value='0', max='100' hidden=true)
                   img#preview(src='', width='100px', hidden=true)
             .modal-footer
-                button.btn.btn-secondary(type='button', data-dismiss='modal') Fermer
-                button#sauvegarder.btn.btn-primary(type="button") Enregistrer &nbsp;
+                button.btn.btn-secondary( data-dismiss='modal') Fermer
+                button.btn.btn-primary(name="sauvegarder") Enregistrer &nbsp;
                   i.fa.fa-save 
-                button#reset.btn.btn-success(type="reset") Effacer &nbsp;
+                button#reset.btn.btn-success Effacer &nbsp;
                   i.fa.fa-recycle
     .alert.alert-info
       .text-right
