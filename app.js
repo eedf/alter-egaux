@@ -55,31 +55,66 @@ app.get('/form',function(req,res){
 				}
 			)
 })
+app.put('/actions/:id/:publish',function(req,res){
+	if(req.params.id && req.params.publish){
+		var id =  parseInt(req.params.id)
+		var publish = (req.params.publish==="true"?true:false)
+		connection=getMysqlConnection()
+		connection.connect()
+		let sqlQuery='update action set publish=? where id=?'
+		connection.query(sqlQuery,[publish,id],function(err,result){
+			if(err) {
+				throw err
+			}
+			else{
+				res.sendStatus(200)
+			}
+		})
+		//connection.end()
+	}
+});
+app.delete('/actions/:id',function(req,res){
+	if(req.params.id){
+		var id =  parseInt(req.params.id)
+		connection=getMysqlConnection()
+		connection.connect()
+		let sqlQuery='delete from action where id=?'
+		connection.query(sqlQuery,[id],function(err,result){
+			if(err) {
+				throw err
+			}
+			else{
+				res.sendStatus(200)
+			}
+		})
+		//connection.end()
+	}
+});
 app.post('/addaction',function (req, res) {
 	connection=getMysqlConnection()
 	connection.connect()
-	console.log(req.body)
 	
-	let groupename=escape(req.body.groupname)
-	let branche=escape(req.body.branche)
-	let descprojet=escape(req.body.descprojet)
-	let lieu=escape(req.body.lieu)
-	let partenaires=escape(req.body.partenaires)
-	let contactmail=escape(req.body.contactmail)
-	let filename=escape(req.body.filename)
+	let groupename=req.body.groupname
+	let branche=req.body.branche
+	let descprojet=req.body.descprojet
+	let lieu=req.body.lieu
+	let partenaires=req.body.partenaires
+	let contactmail=req.body.contactmail
+	let filename=req.body.filename
 	let dateajout=new Date()
 	let token=req.connection.remoteAddress.split(':')[3]
 	
 	
-	let sqlQuery = 'insert into action (groupename,branche,description,lieu,partenaires,contact,photo,datajout,ipaddress) values (?,?,?,?,?,?,?,?,?)'
+	let sqlQuery = 'insert into action (groupename,branche,description,lieu,partenaires,contact,photo,datajout,ipaddress,publish) values (?,?,?,?,?,?,?,?,?,false)'
 	connection.query(sqlQuery,[groupename,branche,descprojet,lieu,partenaires,contactmail,filename,dateajout,token],function(err,result){
 		if(err) {
 			throw err
 		}
 		else{
-			res.sendStatus(200);
+			res.sendStatus(200)
 		}
 	})
+	connection.end()
 
 })
 app.post('/fileupload',function (req, res) {
@@ -174,12 +209,24 @@ app.get('/histoire',(req,res)=>{
 })
 app.get('/actions',(req,res)=>{
 	sendsms('actions url hit')
-	res.render(__dirname+ '/views/fileform.pug',
+	connection = getMysqlConnection();
+	connection.connect()
+	let sqlQuery='select id,groupename,branche,description,lieu,partenaires,contact,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress from action where publish=1'
+	connection.query(sqlQuery,function(err,result){
+		if(err) 
+			throw err
+		else
+			res.render(__dirname+ '/views/fileform.pug',
 				{
-				widthValue:'15%',
-				titre:'Alter-Egaux : Nos actions'
+					list:result,
+					widthValue:'15%',
+					titre:'Alter-Egaux : Nos actions'
 				}
 			)
+	})
+
+	connection.end();
+
 })
 app.get('/outils',(req,res)=>{
 	sendsms('outils url hit')
@@ -239,6 +286,7 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 								titre:'Alter-Egaux : Mise à jour outils'
 							})
 				})
+				connection.end();
 			}
 			else
 			if (element=='event') {
@@ -259,6 +307,7 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 							}
 						)
 					})
+				connection.end();
 			}
 			else
 			if(element=='docodd'){
@@ -278,6 +327,29 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 							}
 						)
 				})
+				connection.end()
+			}
+			else
+			if(element == 'action'){
+				// TODO
+				connection = getMysqlConnection();
+				connection.connect()
+				let sqlQuery='select id,groupename,branche,description,lieu,partenaires,contact,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress,publish from action'
+				connection.query(sqlQuery,function(err,result){
+					if(err) 
+						throw err
+					else
+						res.render(__dirname+ '/views/modereraction.pug',
+							{
+								list:result,
+								token:token,
+								widthValue:'15%',
+								titre:'Alter-Egaux : Modérer les actions'
+							}
+						)
+				})
+
+				connection.end();
 			}
 		}
 		else
@@ -301,7 +373,7 @@ app.get('/menu',(req,res)=>{
 	}
 })
 app.post('/addtool',(req,res)=>{
-	console.log("hit ",res.body)
+	//console.log("hit ",res.body)
 	sess = req.session
 	if(sess.connected){
 		let ip = req.connection.remoteAddress.split(':')[3]
@@ -357,6 +429,7 @@ app.post('/adddocodd',(req,res)=>{
 	// 	res.redirect("/")
 	// }
 })
+
 app.post('/addevent',(req,res)=>{
 	sess = req.session
 	if(sess.connected){
@@ -408,6 +481,7 @@ app.post('/auth',(req,res)=>{
 		}else{res.redirect('/')}
 
 })
+
 app.get('/logout',(req,res)=>{
 	sendsms("logout reached")
 	sess = req.session

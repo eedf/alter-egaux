@@ -43,34 +43,44 @@ block withoutContainer
                   i.fa.fa-save 
                 button#reset.btn.btn-success Effacer &nbsp;
                   i.fa.fa-recycle
+    
+    .modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', id="display")
+      .modal-dialog.modal-lg(role='document')
+        .modal-content
+          .modal-header
+            h5.modal-title Aperçu
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') X
+          .modal-body
+            .container-fluid
+              
+               
+            .modal-footer
+                
     .alert.alert-info
       .text-right
         a.btn.btn-warning(data-toggle='modal', data-target='#addaction') Déposer un projet
 
     h3 Liste des actions :
-    .row
-      .col-md-3
-        <img src="https://via.placeholder.com/300" alt="300px" class="rounded-0">
-      .col-md-3
-        ul.list
-          li Nom groupe
-          li Tranche d'age / Branche
-          li Description
-          li Lieu
-          li Partenaires
-          li contact (mail)
-          li Ajouté le :
-      .col-md-3
-        <img src="https://via.placeholder.com/300" alt="300px" class="rounded-0">
-      .col-md-3
-        ul
-          li Nom groupe
-          li Tranche d'age / Branche
-          li Description
-          li Lieu
-          li Partenaires
-          li contact (mail)
-          li Ajouté le :
+    if list.length==0
+      h4 Aucune action n'a encore été déposée
+    else
+      .row
+        - var i=1
+        each elt in list
+          - i+=1
+            .col-md-3.action-pic
+              a(data-toggle='modal', data-target='#display')
+                img.img-fluid(src="/actionpics/"+elt.photo, alt="Photo action")
+            .col-md-3.action-detail
+              ul.list-group.list-group-flush
+                li.list-group-item Nom groupe : #{elt.groupename}
+                li.list-group-item Tranche d'age / Branche : #{elt.branche}
+                li.list-group-item Description : #{elt.description}
+                li.list-group-item Lieu : #{elt.lieu}
+                li.list-group-item Partenaires : #{elt.partenaires}
+                li.list-group-item contact (mail) : #{elt.contact}
+                li.list-group-item Ajouté le : #{elt.datajout}
 
   block javascript
     script(src='/js/scriptfileupload.js')

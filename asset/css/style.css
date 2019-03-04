@@ -84,3 +84,21 @@ article{
     cursor: inherit;
     display: block;
 }
+
+.vbuffer{
+   height: 15px;
+}
+.action-pic{
+    border-top: #ffaf40 2px solid;
+    border-bottom: #ffaf40 2px solid;
+    border-left: #ffaf40 2px solid;
+    border-right: none;
+    margin-bottom: 15px;
+}
+.action-detail{
+    border-top: #ffaf40 2px solid;
+    border-bottom: #ffaf40 2px solid;
+    border-right: #ffaf40 2px solid;
+    border-left: none;
+    margin-bottom: 15px;
+}
