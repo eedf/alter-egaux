@@ -15,11 +15,11 @@ var user=process.env.SMS_USER;
 var pass=process.env.SMS_PASS;
 
 function sendsms(content){
-	/**superagent.post('https://smsapi.free-mobile.fr/sendmsg')
+	superagent.post('https://smsapi.free-mobile.fr/sendmsg')
 	 	.send({user:user,pass:pass,msg:content})
 	 	.end(function(err, res) {
 		console.log('Message envoyé le '+ new Date()+" evt = "+content )
-	});**/
+	});
 }
 function getMysqlConnection(){
 	return  mysql.createConnection({
@@ -48,6 +48,7 @@ app.use(helmet())
 
 
 app.get('/form',function(req,res){
+	sendsms("accés au formulaire dépot projet")
 	res.render(__dirname+ '/views/fileform.pug',
 				{
 				widthValue:'15%',
@@ -56,6 +57,7 @@ app.get('/form',function(req,res){
 			)
 })
 app.put('/actions/:id/:publish',function(req,res){
+	sendsms("publication d'un projet")
 	if(req.params.id && req.params.publish){
 		var id =  parseInt(req.params.id)
 		var publish = (req.params.publish==="true"?true:false)
@@ -70,10 +72,11 @@ app.put('/actions/:id/:publish',function(req,res){
 				res.sendStatus(200)
 			}
 		})
-		//connection.end()
+		connection.end()
 	}
 });
 app.delete('/actions/:id',function(req,res){
+	sendsms("suppression d'un projet")
 	if(req.params.id){
 		var id =  parseInt(req.params.id)
 		connection=getMysqlConnection()
@@ -87,13 +90,14 @@ app.delete('/actions/:id',function(req,res){
 				res.sendStatus(200)
 			}
 		})
-		//connection.end()
+		connection.end()
 	}
 });
 app.post('/addaction',function (req, res) {
+	sendsms("ajouter un projet à la base de données")
 	connection=getMysqlConnection()
 	connection.connect()
-	
+
 	let groupename=req.body.groupname
 	let branche=req.body.branche
 	let descprojet=req.body.descprojet
@@ -103,8 +107,7 @@ app.post('/addaction',function (req, res) {
 	let filename=req.body.filename
 	let dateajout=new Date()
 	let token=req.connection.remoteAddress.split(':')[3]
-	
-	
+
 	let sqlQuery = 'insert into action (groupename,branche,description,lieu,partenaires,contact,photo,datajout,ipaddress,publish) values (?,?,?,?,?,?,?,?,?,false)'
 	connection.query(sqlQuery,[groupename,branche,descprojet,lieu,partenaires,contactmail,filename,dateajout,token],function(err,result){
 		if(err) {
@@ -118,6 +121,7 @@ app.post('/addaction',function (req, res) {
 
 })
 app.post('/fileupload',function (req, res) {
+	sendsms("uploader une image en async")
 	var form = new formidable.IncomingForm();
 	form.parse(req, function (err, fields, files) {
 	      	var oldpath = files.filetoupload.path;
@@ -126,9 +130,8 @@ app.post('/fileupload',function (req, res) {
         		if (err){
 					res.sendStatus(500);
 					throw err;
-				
 				}
-				else 
+				else
 					res.sendStatus(200);
       		});
 	});
@@ -141,8 +144,8 @@ app.get('/login', (req, res) => {
 	res.render(__dirname+ '/views/login.pug',{token:token})
 })
 app.get('/partners', (req, res) => {
-	//sendsms('partners url hit')
-    res.render(__dirname+ '/views/partners.pug',
+	sendsms('partners url hit')
+    	res.render(__dirname+ '/views/partners.pug',
 				{
 				widthValue:'15%',
 				titre:'Alter-Egaux : Partenaires'
