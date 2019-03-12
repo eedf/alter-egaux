@@ -33,8 +33,9 @@ CREATE TABLE `action` (
   `photo` varchar(50) DEFAULT NULL,
   `datajout` datetime DEFAULT NULL,
   `ipaddress` varchar(15) DEFAULT NULL,
+  `publish` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +44,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
+INSERT INTO `action` VALUES (3,'Les heros','Luttins','Action sensibilisation à l\'égalité homme femme auprès des écoliers','Bailleul','Commune, Région, Département, HRW','contact.bailleul@eedf.fr','arton2412.jpg','2019-03-03 22:37:42','77.141.41.146',0),(4,'Les champions','Ainés','Action autour du travail des enfants','Calais','Commune, Région, Département','calais.contact@eedf.fr','travailenfant.png','2019-03-03 23:15:54','77.141.41.146',0),(5,'Les champions','Ainés','Action sensibilisation sur les inégalités au travail','Paris','Commune, Région, Département','paris.contact@eedf.fr','travail.png','2019-03-04 00:05:16','77.141.41.146',0);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-24  7:08:43
+-- Dump completed on 2019-03-12 20:16:38
