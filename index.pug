@@ -82,6 +82,13 @@ block content
                         span.sr-only Next
     style .carousel-item { height: 150px; }
     script.
-        $(".ico").mouseenter(function (evt, btn) {
-            $("#" + evt.currentTarget.id).animateCss('flipInY');
-        });
+        $(document).ready(function(){
+            $(".ico").mouseenter(function (evt, btn) {
+                $("#" + evt.currentTarget.id).animateCss('flipInY');
+            });
+            //document.body.style.width = "100%";
+            $('body').addClass('stop-scrolling')
+            console.log($(document).width(),"/",$(document).height());
+            console.log($(window).width(),"/",$(window).height());
+            console.log(screen.width,"/",screen.height);
+        })

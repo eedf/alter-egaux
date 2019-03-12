@@ -102,3 +102,7 @@ article{
     border-left: none;
     margin-bottom: 15px;
 }
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
