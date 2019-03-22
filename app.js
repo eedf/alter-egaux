@@ -118,25 +118,23 @@ app.post('/fileupload',function (req, res) {
 	sendsms("uploader une image en async")
 	var form = new formidable.IncomingForm()
 	form.parse(req, function (err, fields, files) {
-	      	var oldpath = files.filetoupload.path
-      		var newpath = __dirname + repo + files.filetoupload.name
-      		// fs.rename(oldpath, newpath, function (err) {
-        	// 	if (err){
-			// 		res.sendStatus(500);
-			// 		throw err;
-			// 	}
-			// 	else
-			// 		res.sendStatus(200);
-			// });
-			fs.copyFile(oldpath, newpath, function (err) {
-				if (err){
-					res.sendStatus(500);
-					throw err;
-				}
-				else
-					res.sendStatus(200);
-				});
-			});
+		var oldpath = files.filetoupload.path
+		var newpath = __dirname + repo + files.filetoupload.name
+		fs.copyFile(oldpath, newpath, function (err) {
+			if (err){
+				throw err
+			}
+		})
+		
+		fs.unlink(oldpath,function(err){
+			if (err){
+				res.sendStatus(500)
+				throw err
+			}
+			else
+				res.sendStatus(200)
+		})
+	})
 })
 
 app.get('/login', (req, res) => {
