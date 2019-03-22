@@ -1,5 +1,5 @@
 app-env
-/asset/actionpics
+#/asset/actionpics
 # Logs
 logs
 *.log

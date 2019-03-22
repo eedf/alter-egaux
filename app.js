@@ -28,15 +28,11 @@ function getMysqlConnection(){
 		password:process.env.DB_USER_PWD,
 		database:process.env.DB_NAME})
 }
-
 app.use('/',express.static(__dirname+'/asset'))
-
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-
 app.use(bodyParser.json())
-
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
@@ -45,8 +41,6 @@ app.use(function (req, res, next) {
     next()
 })
 app.use(helmet())
-
-
 app.get('/form',function(req,res){
 	sendsms("accés au formulaire dépot projet")
 	res.render(__dirname+ '/views/fileform.pug',
@@ -122,19 +116,27 @@ app.post('/addaction',function (req, res) {
 })
 app.post('/fileupload',function (req, res) {
 	sendsms("uploader une image en async")
-	var form = new formidable.IncomingForm();
+	var form = new formidable.IncomingForm()
 	form.parse(req, function (err, fields, files) {
-	      	var oldpath = files.filetoupload.path;
-      		var newpath = __dirname + repo + files.filetoupload.name;
-      		fs.rename(oldpath, newpath, function (err) {
-        		if (err){
+	      	var oldpath = files.filetoupload.path
+      		var newpath = __dirname + repo + files.filetoupload.name
+      		// fs.rename(oldpath, newpath, function (err) {
+        	// 	if (err){
+			// 		res.sendStatus(500);
+			// 		throw err;
+			// 	}
+			// 	else
+			// 		res.sendStatus(200);
+			// });
+			fs.copyFile(oldpath, newpath, function (err) {
+				if (err){
 					res.sendStatus(500);
 					throw err;
 				}
 				else
 					res.sendStatus(200);
-      		});
-	});
+				});
+			});
 })
 
 app.get('/login', (req, res) => {
