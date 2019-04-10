@@ -8,24 +8,91 @@ block withoutContainer
       .modal-dialog.modal-lg(role='document')
         .modal-content
           .modal-header
-            h5.modal-title Décrire votre action alteregaux
+            h5.modal-title Décrire votre action Alter-Egaux
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') X
           .modal-body
             .container-fluid
               .row
                 form#descriptionaction.col-md-12
-                  label(for="groupname") Nom de groupe
-                  input.form-control(type="text" name="groupname" id="groupname" required)
-                  label(for="branche") Tranche d'âge / branche
-                  input.form-control(type="text" name="branche" id="branche" required)
+                  .form-row
+                    .col
+                      label(for="groupname") Nom de l'équipe
+                      input.form-control(type="text" name="groupname" id="groupname" required)
+                    .col
+                      label(for="structure") Nom de la structure
+                      input.form-control(type="text" name="structure" id="structure" required)
+                  .form-row
+                    .col
+                      label(for="projby") Projet par
+                      select.custom-select(name="projby", required)
+                        option(selected=true, disabled=true) Choisir une catégorie
+                        option(value="Lutin.e.s") 6/8 - Lutin.e.s
+                        option(value="Louveteaux.ette.s") 8/11 - Louveteaux.ette.s
+                        option(value="Lutin.e.s") 11/15 - Lutin.e.s
+                        option(value="Aîné.e.s") 15/17 - Aîné.e.s
+                        option(value="JAE.e.s") 18/25 - JAE.e.s
+                        option(value="Adultes") + de 25 - Adultes
+                    .col
+                      label(for="projfor") Projet pour
+                      select.custom-select(name="projfor", required)
+                        option(selected=true, disabled=true) Choisir une catégorie
+                        option(value="Lutin.e.s") 6/8 - Lutin.e.s
+                        option(value="Louveteaux.ette.s") 8/11 - Louveteaux.ette.s
+                        option(value="Lutin.e.s") 11/15 - Lutin.e.s
+                        option(value="Aîné.e.s") 15/17 - Aîné.e.s
+                        option(value="JAE.e.s") 18/25 - JAE.e.s
+                        option(value="Adultes") + de 25 - Adultes
+                  label(for="dateaction") Date de l'action
+                  input.form-control(type="date" name="dateaction" id="dateaction" required)
+                  label(for="theme") Thématique principale
+                  select.custom-select(name="theme", required)
+                    option(selected=true, disabled=true) Choisir un thème
+                    option(value="Eductation") Education de qualité
+                    option(value="Egalite") Egalité des genres
+                    option(value="Environnement") Environnement et citoyenneté
+                    option(value="Faim") Faim & Alimentation saine
+                    option(value="Interculturel") Interculturel & Rencontre de l'autre
+                    option(value="Paix") Construction de la paix
+                    option(value="Pauvrete") pauvreté & exclusion
+                    option(value="Sante") Santé & bien être
+                    option(value="Travail") Travail décent
+                    option(value="Villes") Villes & communautés durables
                   label(for="descprojet") Description du projet
                   textarea.form-control(cols="30", rows="3" name="descprojet" id="descprojet" required)
-                  label(for="lieu") Lieu
-                  input.form-control(type="text" name="lieu" id="lieu" required)
+                  .form-row
+                    .col
+                      label(for="region") Région
+                      select.custom-select(name="region" required)
+                        option(selected=true, disabled=true) Choisir une région
+                        option(value="1") Auvergne-Rhône-Alpes
+                        option(value="2") Bourgogne-Franche-Comté
+                        option(value="3") Bretagne
+                        option(value="4") Centre-Val de Loire
+                        option(value="5") Corse
+                        option(value="6") Grand Est
+                        option(value="7") Hauts-de-France
+                        option(value="8") Ile-de-France
+                        option(value="9") Normandie
+                        option(value="10") Nouvelle-Aquitaine
+                        option(value="11") Occitanie
+                        option(value="12") Pays de la Loire
+                        option(value="13") Provence-Alpes-Côte d'Azur
+                    .col
+                      label(for="lieu") Lieu
+                      input.form-control(type="text" name="lieu" id="lieu" required)
                   label(for="partenaires") Partenaires
                   input.form-control(type="text" name="partenaires" id="partenaires" required)
-                  label(for="contactmail") Contact (mail)
+                  label Contact du référent adulte
+                  hr
+                  .form-row
+                    .col
+                      label(for="nom") Nom
+                      input.form-control(type="text" name="nom" id="nom" required)
+                    .col
+                      label(for="prenom") Prenom
+                      input.form-control(type="text" name="prenom" id="prenom" required)
+                  label(for="contactmail") Mail
                   input.form-control(type="mail" name="contactmail" id="contactmail" required)
               .row
                 .col-md-6
