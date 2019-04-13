@@ -15,6 +15,7 @@ block withoutContainer
             .container-fluid
               .row
                 form#descriptionaction.col-md-12
+                  input(type="text" name="token" hidden value=token) 
                   .form-row
                     .col
                       label(for="groupname") Nom de l'équipe
@@ -110,19 +111,19 @@ block withoutContainer
                   i.fa.fa-save 
                 button#reset.btn.btn-success Effacer &nbsp;
                   i.fa.fa-recycle
-    
-    .modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', id="display")
-      .modal-dialog.modal-lg(role='document')
-        .modal-content
-          .modal-header
-            h5.modal-title Aperçu
-            button.close(type='button', data-dismiss='modal', aria-label='Close')
-              span(aria-hidden='true') X
-          .modal-body
-            .container-fluid
-              
-               
-            .modal-footer
+    each elt in list
+      .modal.fade.bd-example-modal-lg(tabindex='-1', role='dialog', id="display")
+        .modal-dialog.modal-lg(role='document')
+          .modal-content
+            .modal-header
+              h5.modal-title Aperçu
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') X
+            .modal-body
+              .container-fluid
+                img.img-fluid(src="/actionpics/"+elt.photo, alt="Photo action")
+                
+              .modal-footer
                 
     .alert.alert-info
       .text-right
@@ -140,14 +141,20 @@ block withoutContainer
               a(data-toggle='modal', data-target='#display')
                 img.img-fluid(src="/actionpics/"+elt.photo, alt="Photo action")
             .col-md-3.action-detail
-              ul.list-group.list-group-flush
-                li.list-group-item Nom groupe : #{elt.groupename}
-                li.list-group-item Tranche d'age / Branche : #{elt.branche}
-                li.list-group-item Description : #{elt.description}
-                li.list-group-item Lieu : #{elt.lieu}
-                li.list-group-item Partenaires : #{elt.partenaires}
-                li.list-group-item Contact (mail) : #{elt.contact}
-                li.list-group-item Ajouté le : #{elt.datajout}
-
-  block javascript
-    script(src='/js/scriptfileupload.js')
+              dl
+                dd Nom groupe : #{elt.groupename}
+                dd Projet par : #{elt.projectby}
+                dd Projet pour : #{elt.projectfor}
+                dd
+                  dl
+                    dd Date : #{elt.dateofaction}
+                    dd Theme : #{elt.themeofaction}
+                    dd Description : #{elt.description}
+                dd Lieu : #{elt.lieu}
+                dd Partenaires : #{elt.partenaires}
+                dd 
+                  dl
+                    dd #{elt.prenomcontact} #{elt.nomcontact} 
+                    dd #{elt.contact}
+                dd Ajouté le : #{elt.datajout}    
+  script(src='/js/scriptfileupload.js')
