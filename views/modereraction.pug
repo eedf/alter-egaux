@@ -16,12 +16,13 @@ block withoutContainer
             span Modérer les actions publiées par les utilisateurs
     .container-fluid
         h3 Liste des actions :
+        
         table.table.stripped(id="example")
             thead
                 th #
                 th Nom du groupe
-                th Branche
-                th Photo & Description
+                th Structure
+                th Description
                 th Lieu
                 th Partenaires
                 th Contact
@@ -29,18 +30,30 @@ block withoutContainer
                 th Edition
             tbody
                 - var i=1
+                
                 each elt in list
                     tr
                         td.align-middle=i++
                         td.align-middle=elt.groupename
-                        td.align-middle=elt.branche
+                        td.align-middle
+                            dl
+                                dd Région : #{elt.region}
+                                dd Structure : #{elt.slaname}
+                                dd Projet par : #{elt.projectby}
+                                dd Projet pour : #{elt.projectfor}                              
                         td.align-middle
                             figure.figure
                                 img(src="/actionpics/"+elt.photo, alt="Photo action",width="150px")
-                                figcaption.figure-caption Description : #{elt.description}
+                                dl
+                                    dd Date : #{elt.dateofaction}
+                                    dd Theme : #{elt.themeofaction}
+                                    dd Description : #{elt.description}
                         td.align-middle=elt.lieu
                         td.align-middle=elt.partenaires
-                        td.align-middle=elt.contact
+                        td.align-middle 
+                            dl
+                                dd #{elt.prenomcontact} #{elt.nomcontact} 
+                                dd #{elt.contact}
                         td.align-middle=elt.ipaddress
                         td.align-middle
                             button#validation.btn.btn-success(onclick='validation(this,'+elt.id+');', hidden=!(elt.publish===0))
@@ -57,7 +70,6 @@ block javascript
 
         function validation (e,id){
             var ajax = $.ajax({url:"/actions/"+id+"/true",method:"PUT"});
-            
             ajax.done(function(msg){
                 if(msg){
                     alert("Validation de l'action avec succés");
@@ -94,5 +106,4 @@ block javascript
                     console.log(msg);
                 });
             }
-            
         }

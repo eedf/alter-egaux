@@ -41,15 +41,6 @@ app.use(function (req, res, next) {
     next()
 })
 app.use(helmet())
-app.get('/form',function(req,res){
-	sendsms("accés au formulaire dépot projet")
-	res.render(__dirname+ '/views/fileform.pug',
-				{
-				widthValue:'15%',
-				titre:'Alter-Egaux : Formulaire'
-				}
-			)
-})
 app.put('/actions/:id/:publish',function(req,res){
 	sendsms("publication d'un projet")
 	if(req.params.id && req.params.publish){
@@ -89,30 +80,37 @@ app.delete('/actions/:id',function(req,res){
 });
 app.post('/addaction',function (req, res) {
 	sendsms("ajouter un projet à la base de données")
-	connection=getMysqlConnection()
-	connection.connect()
-
 	let groupename=req.body.groupname
-	let branche=req.body.branche
+	let sla = req.body.structure
+	let projby = req.body.projby
+	let projfor = req.body.projfor
+	let dateaction = new Date(req.body.dateaction)
+	let theme=req.body.theme
 	let descprojet=req.body.descprojet
+	let region = req.body.region
 	let lieu=req.body.lieu
+	let nom=req.body.nom
+	let prenom=req.body.prenom
 	let partenaires=req.body.partenaires
 	let contactmail=req.body.contactmail
 	let filename=req.body.filename
 	let dateajout=new Date()
-	let token=req.connection.remoteAddress.split(':')[3]
-
-	let sqlQuery = 'insert into action (groupename,branche,description,lieu,partenaires,contact,photo,datajout,ipaddress,publish) values (?,?,?,?,?,?,?,?,?,false)'
-	connection.query(sqlQuery,[groupename,branche,descprojet,lieu,partenaires,contactmail,filename,dateajout,token],function(err,result){
-		if(err) {
-			throw err
-		}
-		else{
-			res.sendStatus(200)
-		}
-	})
-	connection.end()
-
+	if (req.body.token==sha(req.connection.remoteAddress.split(':')[3])){
+		let ip = req.connection.remoteAddress.split(':')[3]
+		let sqlQuery = 'insert into action (groupename,slaname,region,projectby,projectfor,themeofaction,dateofaction,description,lieu,partenaires,contact,nomcontact,prenomcontact,photo,datajout,ipaddress,publish) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,false)'
+		
+		connection=getMysqlConnection()
+		connection.connect()
+		connection.query(sqlQuery,[groupename,sla,region,projby,projfor,theme,dateaction,descprojet,lieu,partenaires,contactmail,nom,prenom,filename,dateajout,ip],function(err,result){
+			if(err) {
+				throw err
+			}
+			else{
+				res.sendStatus(200)
+			}
+		})
+		connection.end()
+	}
 })
 app.post('/fileupload',function (req, res) {
 	sendsms("uploader une image en async")
@@ -136,7 +134,6 @@ app.post('/fileupload',function (req, res) {
 		})
 	})
 })
-
 app.get('/login', (req, res) => {
 	sendsms("Login form reached")
 	let ip = req.connection.remoteAddress.split(':')[3]
@@ -214,22 +211,22 @@ app.get('/actions',(req,res)=>{
 	sendsms('actions url hit')
 	connection = getMysqlConnection();
 	connection.connect()
-	let sqlQuery='select id,groupename,branche,description,lieu,partenaires,contact,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress from action where publish=1'
+	let sqlQuery='select id,groupename,slaname,region,projectby,projectfor,DATE_FORMAT(dateofaction, "%d/%m/%Y")dateofaction,themeofaction,description,lieu,partenaires,prenomcontact,nomcontact, contact,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress from action where publish=1'
+	let formtoken=sha(req.connection.remoteAddress.split(':')[3])
 	connection.query(sqlQuery,function(err,result){
 		if(err) 
 			throw err
 		else
 			res.render(__dirname+ '/views/fileform.pug',
 				{
+					token:formtoken,
 					list:result,
 					widthValue:'15%',
 					titre:'Alter-Egaux : Nos actions'
 				}
 			)
 	})
-
 	connection.end();
-
 })
 app.get('/outils',(req,res)=>{
 	sendsms('outils url hit')
@@ -261,7 +258,6 @@ app.get('/listtest',(req,res)=>{
 	res.render(__dirname+ '/views/list-test.pug',
 			{
 				widthValue:'25%',
-
 				titre:'Alter-Egaux : Accueil'
 			}
 		);
@@ -337,7 +333,8 @@ app.get('/add/:element',(req,res)=>{//root les url pour les formulaires
 				// TODO
 				connection = getMysqlConnection();
 				connection.connect()
-				let sqlQuery='select id,groupename,branche,description,lieu,partenaires,contact,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress,publish from action'
+				let sqlQuery='select id,groupename,slaname,region,projectby,projectfor,DATE_FORMAT(dateofaction, "%d/%m/%Y")dateofaction,themeofaction,description,lieu,partenaires,contact,nomcontact,prenomcontact,ipaddress,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress,publish from action'
+				//'select id,groupename,branche,description,lieu,partenaires,contact,photo,DATE_FORMAT(datajout, "%d/%m/%Y")datajout,ipaddress,publish from action'
 				connection.query(sqlQuery,function(err,result){
 					if(err) 
 						throw err
@@ -432,7 +429,6 @@ app.post('/adddocodd',(req,res)=>{
 	// 	res.redirect("/")
 	// }
 })
-
 app.post('/addevent',(req,res)=>{
 	sess = req.session
 	if(sess.connected){
@@ -484,14 +480,12 @@ app.post('/auth',(req,res)=>{
 		}else{res.redirect('/')}
 
 })
-
 app.get('/logout',(req,res)=>{
 	sendsms("logout reached")
 	sess = req.session
 	sess.connected=false
 	res.redirect('/')
 })
-
 app.listen(8080,function(){
 	console.log('serveur ecoutant au port 8080 le ',new Date())
 })
