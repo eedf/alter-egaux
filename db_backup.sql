@@ -25,17 +25,24 @@ DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `groupename` varchar(50) DEFAULT NULL,
-  `branche` varchar(50) DEFAULT NULL,
+  `slaname` varchar(50) DEFAULT NULL,
+  `region` varchar(50) DEFAULT NULL,
+  `projectby` varchar(50) DEFAULT NULL,
+  `projectfor` varchar(50) DEFAULT NULL,
+  `themeofaction` varchar(50) DEFAULT NULL,
+  `dateofaction` date DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `lieu` varchar(50) DEFAULT NULL,
   `partenaires` varchar(50) DEFAULT NULL,
   `contact` varchar(50) DEFAULT NULL,
+  `nomcontact` varchar(50) DEFAULT NULL,
+  `prenomcontact` varchar(50) DEFAULT NULL,
   `photo` varchar(50) DEFAULT NULL,
   `datajout` datetime DEFAULT NULL,
   `ipaddress` varchar(15) DEFAULT NULL,
   `publish` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +51,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (3,'Les heros','Luttins','Action sensibilisation à l\'égalité homme femme auprès des écoliers','Bailleul','Commune, Région, Département, HRW','contact.bailleul@eedf.fr','arton2412.jpg','2019-03-03 22:37:42','77.141.41.146',0),(4,'Les champions','Ainés','Action autour du travail des enfants','Calais','Commune, Région, Département','calais.contact@eedf.fr','travailenfant.png','2019-03-03 23:15:54','77.141.41.146',0),(5,'Les champions','Ainés','Action sensibilisation sur les inégalités au travail','Paris','Commune, Région, Département','paris.contact@eedf.fr','travail.png','2019-03-04 00:05:16','77.141.41.146',0);
+INSERT INTO `action` VALUES (6,'équipe','structure','3','JAE.e.s','Louveteaux.ette.s','Eductation','2019-03-01','description projet','Lieu action','Commune','dijd@glai.com','nom contact','prenom contact','Formulaire projet.jpg','2019-04-12 23:54:17','77.141.41.146',0),(7,'La dream team','Nous','8','Adultes','Adultes','Eductation','2019-04-18','Test test tseeeeeeeeeeet','Chez nous','Nous avec nous même','blablabla@gmail.cz','Moi','Moimoi','flyers JDM 2.PNG','2019-04-15 12:28:57','164.177.0.225',0);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,6 +117,54 @@ INSERT INTO `evenement` VALUES (1,'Nuit de la belle étoile','Passer une nuit en
 UNLOCK TABLES;
 
 --
+-- Table structure for table `membre_categorie`
+--
+
+DROP TABLE IF EXISTS `membre_categorie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `membre_categorie` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `membre_categorie`
+--
+
+LOCK TABLES `membre_categorie` WRITE;
+/*!40000 ALTER TABLE `membre_categorie` DISABLE KEYS */;
+INSERT INTO `membre_categorie` VALUES (1,'6/8 - Lutin.e.s'),(2,'8/11 - Louveteaux.ette.s'),(3,'11/15 - Lutin.e.s'),(4,'15/17 - Aîné.e.s'),(5,'18/25 - JAE.e.s'),(6,'+ de 25 - Adultes');
+/*!40000 ALTER TABLE `membre_categorie` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `odd`
+--
+
+DROP TABLE IF EXISTS `odd`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `odd` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `odd`
+--
+
+LOCK TABLES `odd` WRITE;
+/*!40000 ALTER TABLE `odd` DISABLE KEYS */;
+INSERT INTO `odd` VALUES (1,'Education de qualité'),(2,'Egalité des genres'),(3,'Environnement et citoyenneté'),(4,'Faim & Alimentation saine'),(5,'Interculturel & Rencontre de l\'autre'),(6,'Construction de la paix'),(7,'Pauvreté & exclusion'),(8,'Santé & bien être'),(9,'Travail décent'),(10,'Villes & communautés durables');
+/*!40000 ALTER TABLE `odd` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `outil`
 --
 
@@ -146,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-12 20:16:38
+-- Dump completed on 2019-04-15 12:49:39
