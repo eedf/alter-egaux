@@ -180,6 +180,16 @@ app.get('/projet',(req,res)=>{
 		}
 	);
 })
+app.get('/campsbase',(req,res)=>{
+	sendsms('camps base url hit')
+	res.render(__dirname+ '/views/camps.pug',
+		{
+			widthValue:'15%',
+			//paddingvalue:"body {padding-top:5rem;}",
+			titre:'Alter-Egaux : Camps de base'
+		}
+	);
+})
 app.get('/event',(req,res)=>{
 	sendsms('event url hit')
 	connection=getMysqlConnection()
