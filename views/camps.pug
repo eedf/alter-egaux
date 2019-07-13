@@ -5,3 +5,20 @@ block title
 block content
     h5.blockquote Camps de Base :
     p les camps de base permettent d’approfondir les pratiques de scoutisme et d’ancrer les projets pédagogiques dans les enjeux écologiques, économiques et culturels du développement durable. Ces lieux d’aventure permettent de rencontrer d’autres unités, de découvrir ou d’approfondir des techniques utiles à la construction d’un monde meilleur. Ce sont également des lieux où on peut trouver du soutien à la direction, de la formation etc...
+    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.5.1/dist/leaflet.css', integrity='sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==', crossorigin='')
+    script(src='https://unpkg.com/leaflet@1.5.1/dist/leaflet.js', integrity='sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==', crossorigin='')
+    style #mapid { height: 600px; }
+    #mapid
+    script.
+        var mymap = L.map('mapid').setView([48.85583, 2.349014], 7);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiZ29vZGxpbmsiLCJhIjoiY2pjN2RoeGtpMDUzZjJ3bXJ3YXBmbXI5bCJ9.bNT1nyfMxbzC2fQHZbpAyQ'
+        }).addTo(mymap);
+        function onMapClick(e) {
+            console.log("You clicked the map at " + e.latlng);
+        }
+
+        mymap.on('click', onMapClick);
