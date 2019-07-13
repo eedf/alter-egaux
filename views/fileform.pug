@@ -18,6 +18,10 @@ block withoutContainer
                   input(type="text" name="token" hidden value=token) 
                   .form-row
                     .col
+                      label(for="projectname") Nom du projet
+                      input.form-control(type="text" name="projectname" id="projectname" required)
+                  .form-row
+                    .col
                       label(for="groupname") Nom de l'équipe
                       input.form-control(type="text" name="groupname" id="groupname" required)
                     .col
@@ -98,10 +102,9 @@ block withoutContainer
               .row
                 .col-md-6
                   form#fileform(enctype='multipart/form-data')
-                    label(for="filetoupload") Sélectionner une photo pertinente et Cliquer sur Upload
+                    label(for="filetoupload") Sélectionner une photo pertinente pour illustrer l'action ensuite Cliquer sur Upload
                     input.form-control-file(type='file', name='filetoupload', accept='image/x-png,image/gif,image/jpeg')
                     input#upload.btn.btn-primary(type='button', value='Upload',hidden=false)
-                    
                 .col-md-6
                   progress.progress.progress-bar-striped.progress-bar-animated(value='0', max='100' hidden=true)
                   img#preview(src='', width='100px', hidden=true)

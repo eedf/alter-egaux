@@ -80,6 +80,7 @@ app.delete('/actions/:id',function(req,res){
 });
 app.post('/addaction',function (req, res) {
 	sendsms("ajouter un projet à la base de données")
+	let projectname=req.body.projectname
 	let groupename=req.body.groupname
 	let sla = req.body.structure
 	let projby = req.body.projby
@@ -97,11 +98,11 @@ app.post('/addaction',function (req, res) {
 	let dateajout=new Date()
 	if (req.body.token==sha(req.connection.remoteAddress.split(':')[3])){
 		let ip = req.connection.remoteAddress.split(':')[3]
-		let sqlQuery = 'insert into action (groupename,slaname,region,projectby,projectfor,themeofaction,dateofaction,description,lieu,partenaires,contact,nomcontact,prenomcontact,photo,datajout,ipaddress,publish) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,false)'
+		let sqlQuery = 'insert into action (projectname,groupename,slaname,region,projectby,projectfor,themeofaction,dateofaction,description,lieu,partenaires,contact,nomcontact,prenomcontact,photo,datajout,ipaddress,publish) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,false)'
 		
 		connection=getMysqlConnection()
 		connection.connect()
-		connection.query(sqlQuery,[groupename,sla,region,projby,projfor,theme,dateaction,descprojet,lieu,partenaires,contactmail,nom,prenom,filename,dateajout,ip],function(err,result){
+		connection.query(sqlQuery,[projectname,groupename,sla,region,projby,projfor,theme,dateaction,descprojet,lieu,partenaires,contactmail,nom,prenom,filename,dateajout,ip],function(err,result){
 			if(err) {
 				throw err
 			}
