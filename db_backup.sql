@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.38-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.40-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: alteregaux
 -- ------------------------------------------------------
--- Server version	10.1.38-MariaDB-0ubuntu0.18.04.1
+-- Server version	10.1.40-MariaDB-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `action`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `action` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `projectname` varchar(50) DEFAULT NULL,
   `groupename` varchar(50) DEFAULT NULL,
   `slaname` varchar(50) DEFAULT NULL,
   `region` varchar(50) DEFAULT NULL,
@@ -42,7 +43,7 @@ CREATE TABLE `action` (
   `ipaddress` varchar(15) DEFAULT NULL,
   `publish` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +52,7 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (6,'équipe','structure','3','JAE.e.s','Louveteaux.ette.s','Eductation','2019-03-01','description projet','Lieu action','Commune','dijd@glai.com','nom contact','prenom contact','Formulaire projet.jpg','2019-04-12 23:54:17','77.141.41.146',0),(7,'La dream team','Nous','8','Adultes','Adultes','Eductation','2019-04-18','Test test tseeeeeeeeeeet','Chez nous','Nous avec nous même','blablabla@gmail.cz','Moi','Moimoi','flyers JDM 2.PNG','2019-04-15 12:28:57','164.177.0.225',0);
+INSERT INTO `action` VALUES (7,'test action','La dream team','Nous','8','Adultes','Adultes','Eductation','2019-04-18','Test test tseeeeeeeeeeet','Chez nous','Nous avec nous même','blablabla@gmail.cz','Moi','Moimoi','flyers JDM 2.PNG','2019-04-15 12:28:57','164.177.0.225',0),(8,'test action','Test','Test','5','Lutin.e.s','Lutin.e.s','Paix','2019-05-29','fsfesfsd','fsfds','fesfd','fesfdsffe@desfdssf','fesfdsf','fesfdsfs','34259036_1242347909233120_4566048675192635392_n.jp','2019-05-10 11:41:58','77.136.41.204',0);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +189,7 @@ CREATE TABLE `outil` (
 
 LOCK TABLES `outil` WRITE;
 /*!40000 ALTER TABLE `outil` DISABLE KEYS */;
-INSERT INTO `outil` VALUES (2,'Polices (Alter-Egaux)','Polices à utiliser pour les documents Alter-Egaux. TrashHand pour les titres et Calibre pour le texte courant.','polices.png','2018-09-09 22:01:09','http://www.eedf.fr/download/31194/polices---alter-egaux.html'),(3,'Charte graphique Alter-Egaux','N/A','chartegraphique.png','2018-09-09 22:01:36','http://www.eedf.fr/download/31195/charte-graphique---alter-egaux.html'),(4,'Pictogrammes ODD (Format Carré)','Les pictogrammes de l\'ONU adaptés par les EEDF pour le projet Alter-égaux. ','pictos.png','2018-09-09 22:01:56','http://www.eedf.fr/download/30269/pictogrammes-odd---format-carre.html'),(5,'Pictogrammes ODD (Format Rond)','Les pictogrammes de l\'ONU adaptés par les EEDF pour le projet Alter-égaux. ','pictos.png','2018-09-09 22:02:18','http://www.eedf.fr/download/30270/pictogrammes-odd---format-rond.html'),(6,'Affiche Nuit de la belle étoile','N/A','affichenbe.png','2018-09-09 22:02:46','http://www.eedf.fr/download/31212/affiche-nuit-de-la-belle-etoile.html'),(7,'Affiche NBE (Infos et contact)','Complément à insérer sous l\'affiche Nuit de la belle étoile, pour indiquer le lieu et la date de l\'événement ainsi que le contact du groupe. Fichier personnalisable sous Powerpoint. ','affichenbeinfo.png','2018-09-09 22:03:13','http://www.eedf.fr/download/31193/affiche-nbe---infos-et-contact.html'),(8,'Guide - Nuit de la belle étoile','N/A','guidenbe.png','2018-09-09 22:03:45','http://www.eedf.fr/download/31191/guide---nuit-de-la-belle-etoile.html'),(9,'Guide - Journée Trappeur','N/A','guidejt.png','2018-09-09 22:04:10','http://www.eedf.fr/download/32625/guide---journee-trappeur.html'),(10,'Guide - Journée de la curiosité','N/A','guidejc.png','2018-09-09 22:04:33','http://www.eedf.fr/download/32626/guide---journee-de-la-curiosite.html'),(11,'Personnages de l\'histoire Alter-Egaux','Fichier compressé contenant les images des personnages de l\'histoire Alter-Egaux','personnages.png','2018-09-09 22:05:22','/asset/docs/tools/personnages-alter-egaux.zip');
+INSERT INTO `outil` VALUES (2,'Polices (Alter-Egaux)','Polices à utiliser pour les documents Alter-Egaux. TrashHand pour les titres et Calibre pour le texte courant.','polices.png','2018-09-09 22:01:09','https://www.eedf.fr/wp-content/uploads/2018/09/682ee0bb825557d47c17e52aa95d235a.zip'),(3,'Charte graphique Alter-Egaux','N/A','chartegraphique.png','2018-09-09 22:01:36','https://www.eedf.fr/wp-content/uploads/2018/09/5c00880accde436f337e1e27e7630ef6.pdf'),(4,'Pictogrammes ODD (Format Carré)','Les pictogrammes de l\'ONU adaptés par les EEDF pour le projet Alter-égaux. ','pictos.png','2018-09-09 22:01:56','https://www.eedf.fr/wp-content/uploads/2018/09/025ac7c6307fad25ece91d15d6405e5c.zip'),(5,'Pictogrammes ODD (Format Rond)','Les pictogrammes de l\'ONU adaptés par les EEDF pour le projet Alter-égaux. ','pictos.png','2018-09-09 22:02:18','https://www.eedf.fr/wp-content/uploads/2018/09/54a6d271d189c1dd4681a71ee419320e.zip'),(6,'Affiche Nuit de la belle étoile','N/A','affichenbe.png','2018-09-09 22:02:46','http://www.eedf.fr/download/31212/affiche-nuit-de-la-belle-etoile.html'),(7,'Affiche NBE (Infos et contact)','Complément à insérer sous l\'affiche Nuit de la belle étoile, pour indiquer le lieu et la date de l\'événement ainsi que le contact du groupe. Fichier personnalisable sous Powerpoint. ','affichenbeinfo.png','2018-09-09 22:03:13','http://www.eedf.fr/download/31193/affiche-nbe---infos-et-contact.html'),(8,'Guide - Nuit de la belle étoile','N/A','guidenbe.png','2018-09-09 22:03:45','http://www.eedf.fr/download/31191/guide---nuit-de-la-belle-etoile.html'),(9,'Guide - Journée Trappeur','N/A','guidejt.png','2018-09-09 22:04:10','http://www.eedf.fr/download/32625/guide---journee-trappeur.html'),(10,'Guide - Journée de la curiosité','N/A','guidejc.png','2018-09-09 22:04:33','http://www.eedf.fr/download/32626/guide---journee-de-la-curiosite.html'),(11,'Personnages de l\'histoire Alter-Egaux','Fichier compressé contenant les images des personnages de l\'histoire Alter-Egaux','personnages.png','2018-09-09 22:05:22','/docs/tools/personnages-alter-egaux.zip');
 /*!40000 ALTER TABLE `outil` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -201,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-15 12:49:39
+-- Dump completed on 2019-07-27 16:56:04
