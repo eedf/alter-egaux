@@ -2,8 +2,8 @@ var filename = "";
 
 $(':file').on('change', function() {
     var file = this.files[0];
-    if (file.size > 1024*500) {
-        alert('max upload size is 500ko');
+    if (file.size > 1024*2000) {
+        alert('Fichier trop grand, taille maximum autorisée est 2Mo');
 		$("#fileform")[0].reset();
     }
 	filename = file.name;
