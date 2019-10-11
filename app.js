@@ -15,11 +15,11 @@ var user=process.env.SMS_USER;
 var pass=process.env.SMS_PASS;
 
 function sendsms(content){
-	superagent.post('https://smsapi.free-mobile.fr/sendmsg')
-	 	.send({user:user,pass:pass,msg:content})
-	 	.end(function(err, res) {
+	//superagent.post('https://smsapi.free-mobile.fr/sendmsg')
+	 //	.send({user:user,pass:pass,msg:content})
+	 // .end(function(err, res) {
 		console.log('Message envoyé le '+ new Date()+" evt = "+content )
-	});
+	//});
 }
 function getMysqlConnection(){
 	return  mysql.createConnection({
@@ -183,10 +183,12 @@ app.get('/projet',(req,res)=>{
 })
 app.get('/campsbase',(req,res)=>{
 	sendsms('camps base url hit')
+	let formtoken=sha(req.connection.remoteAddress.split(':')[3])
 	res.render(__dirname+ '/views/camps.pug',
 		{
 			widthValue:'15%',
 			//paddingvalue:"body {padding-top:5rem;}",
+			token:formtoken,
 			titre:'Alter-Egaux : Camps de base'
 		}
 	);
@@ -491,6 +493,55 @@ app.post('/auth',(req,res)=>{
 		}else{res.redirect('/')}
 
 })
+app.get('/listCampsBase',(req,res)=>{
+	if (true){//token==req.body.token
+		connection=getMysqlConnection()
+		connection.connect()
+		let query = "select campsName,coordinates,pedago,odd,saison,ressources,adresse,ville,cp,region,partenaires,objectifs,programmes,dateCreation from camps where true";
+		connection.query(query,function(err,result){
+			if(err) {
+				throw err
+			}
+			else{
+				res.send(result)
+			}
+		})
+	}
+})
+app.post('/addCampsBase',(req,res)=>{
+	let ip = req.connection.remoteAddress.split(':')[3]
+	let token=sha(ip)
+	if (token==req.body.token){
+		connection=getMysqlConnection()
+		connection.connect()
+		let campsName = req.body.campsName
+		let coordinates = req.body.coordinate
+		let pedago = (typeof(req.body.pedago)!= "undefined") ? req.body.pedago.join(";"):""
+		let odd = (typeof(req.body.odd)!= "undefined") ? req.body.odd.join(";") : ""
+		let saison = (typeof(req.body.saison)!= "undefined") ?req.body.saison.join(";"):""
+		let ressources=req.body.ressources.trim()
+		let adresse = req.body.adresse.trim()
+		let ville = req.body.ville.trim()
+		let cp = req.body.cp.trim()
+		let region = req.body.region.trim()
+		let partenaires = req.body.partenaires.trim()
+		let objectifs = req.body.objectifs.trim()
+		let programmes = req.body.programmes.trim()
+		let dateajout=new Date()
+		let ip = req.connection.remoteAddress.split(':')[3]
+		let values =[campsName,coordinates,pedago,odd,saison,ressources,adresse,ville,cp,region,partenaires,objectifs,programmes,ip,dateajout]
+		let sqlQuery = 'insert into camps (campsName,coordinates,pedago,odd,saison,ressources,adresse,ville,cp,region,partenaires,objectifs,programmes,adresseIp,dateCreation) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+		connection.query(sqlQuery,values,function(err,result){
+			if(err) {
+				throw err
+			}
+			else{
+				res.send(values)
+			}
+		})
+		//res.send([coordinates,pedago,odd,saison])
+	}
+});
 app.get('/logout',(req,res)=>{
 	sendsms("logout reached")
 	sess = req.session

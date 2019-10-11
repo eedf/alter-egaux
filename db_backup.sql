@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.40-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: alteregaux
 -- ------------------------------------------------------
--- Server version	10.1.40-MariaDB-0ubuntu0.18.04.1
+-- Server version	10.1.41-MariaDB-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,8 +52,46 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (7,'test action','La dream team','Nous','8','Adultes','Adultes','Eductation','2019-04-18','Test test tseeeeeeeeeeet','Chez nous','Nous avec nous même','blablabla@gmail.cz','Moi','Moimoi','flyers JDM 2.PNG','2019-04-15 12:28:57','164.177.0.225',0),(8,'test action','Test','Test','5','Lutin.e.s','Lutin.e.s','Paix','2019-05-29','fsfesfsd','fsfds','fesfd','fesfdsffe@desfdssf','fesfdsf','fesfdsfs','34259036_1242347909233120_4566048675192635392_n.jp','2019-05-10 11:41:58','77.136.41.204',0);
+INSERT INTO `action` VALUES (7,'test action','La dream team','Nous','8','Adultes','Adultes','Eductation','2019-04-18','Test test tseeeeeeeeeeet','Chez nous','Nous avec nous même','blablabla@gmail.cz','Moi','Moimoi','flyers JDM 2.PNG','2019-04-15 12:28:57','164.177.0.225',1),(8,'test action','Test','Test','5','Lutin.e.s','Lutin.e.s','Paix','2019-05-29','fsfesfsd','fsfds','fesfd','fesfdsffe@desfdssf','fesfdsf','fesfdsfs','34259036_1242347909233120_4566048675192635392_n.jp','2019-05-10 11:41:58','77.136.41.204',1);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `camps`
+--
+
+DROP TABLE IF EXISTS `camps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `camps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campsName` varchar(255) DEFAULT NULL,
+  `coordinates` varchar(255) DEFAULT NULL,
+  `pedago` varchar(255) DEFAULT NULL,
+  `odd` varchar(255) DEFAULT NULL,
+  `saison` varchar(255) DEFAULT NULL,
+  `ressources` varchar(255) DEFAULT NULL,
+  `adresse` varchar(255) DEFAULT NULL,
+  `ville` varchar(255) DEFAULT NULL,
+  `cp` varchar(255) DEFAULT NULL,
+  `region` varchar(255) DEFAULT NULL,
+  `partenaires` varchar(255) DEFAULT NULL,
+  `objectifs` varchar(255) DEFAULT NULL,
+  `programmes` varchar(255) DEFAULT NULL,
+  `adresseIp` varchar(255) DEFAULT NULL,
+  `dateCreation` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `camps`
+--
+
+LOCK TABLES `camps` WRITE;
+/*!40000 ALTER TABLE `camps` DISABLE KEYS */;
+INSERT INTO `camps` VALUES (1,'Siège des EEDF','LatLng(48.846297, 2.552193)','chk1;chk4;chk5','chk9','','Centre ville','12 Place Georges Pompidou,','Noisy-le-Grand','93160','Ile de france','','','','91.168.76.154','2019-10-11 02:00:48');
+/*!40000 ALTER TABLE `camps` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -202,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-27 16:56:04
+-- Dump completed on 2019-10-11  2:04:50

@@ -2,13 +2,118 @@
 extends layout.pug
 block title
     title=titre
-block content
-    h5.blockquote Camps de Base :
-    p les camps de base permettent d’approfondir les pratiques de scoutisme et d’ancrer les projets pédagogiques dans les enjeux écologiques, économiques et culturels du développement durable. Ces lieux d’aventure permettent de rencontrer d’autres unités, de découvrir ou d’approfondir des techniques utiles à la construction d’un monde meilleur. Ce sont également des lieux où on peut trouver du soutien à la direction, de la formation etc...
-    link(rel='stylesheet', href='https://unpkg.com/leaflet@1.5.1/dist/leaflet.css', integrity='sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==', crossorigin='')
-    script(src='https://unpkg.com/leaflet@1.5.1/dist/leaflet.js', integrity='sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==', crossorigin='')
-    style #mapid { height: 600px; }
-    #mapid
+block withoutContainer
+    style=paddingvalue
+    .container-fluid
+        .alert.alert-info.row
+            .col-md-6 Camps de base
+            .col-md-6.text-right
+                a.btn.btn-warning(onClick="javascript:display();") Ajouter un camps de base
+    .container
+        .row#curtain
+            form#campBaseForm
+                input(type="text" name="token" hidden value=token) 
+                .form-row
+                    label(for="campsName") Nom du camps de base
+                    input.form-control(type="text" name="campsName" id="campsName" required)
+                    label(for="coordinate") Coordonnées du point sélectionné
+                    input.form-control(type="text" name="coordinate" id="coordinate" required readonly)
+                h4 Ce que l'on propose : (Cochez les cases correspondantes)
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk1(type="checkbox" name="pedago[0]" value="chk1") 
+                    label.custom-control-label(for="chk1") Présence d’un espace dédié aux pédagogies et aux techniques scouts
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk2(type="checkbox" name="pedago[1]" value="chk2" ) 
+                    label.custom-control-label(for="chk2") Présence de perches et de bois pour le froissartage
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk3(type="checkbox" name="pedago[2]" value="chk3") 
+                    label.custom-control-label(for="chk3") Présence d’une équipe de soutien pour l'installation techniques des sous camps par unités.
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk4(type="checkbox" name="pedago[3]" value="chk4") 
+                    label.custom-control-label(for="chk4") Présence d’une équipe d'accueil et d'animation
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk5(type="checkbox" name="pedago[4]" value="chk5") 
+                    label.custom-control-label(for="chk5") Animation d’un programme de chantiers citoyens
+                h4 Présence d’un village ODD
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk6(type="checkbox" name="odd[0]" value="chk6") 
+                    label.custom-control-label(for="chk6") Propositions d’ateliers de formation sur les ODD
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk7(type="checkbox" name="odd[1]" value="chk7") 
+                    label.custom-control-label(for="chk7") Possibilité de résidence temporaire pour les adultes volontaires et bénévoles
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk8(type="checkbox" name="odd[2]" value="chk8") 
+                    label.custom-control-label(for="chk8") Soutien à des projets de jeunes (ex : ouverture d’unités scouts, projets JAE, etc…)
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk9(type="checkbox" name="odd[3]" value="chk9") 
+                    label.custom-control-label(for="chk9") Accompagnement pédagogique des unités pendant l’année
+                .custom-control.custom-checkbox
+                    input.custom-control-input#chk10(type="checkbox" name="odd[4]" value="chk10") 
+                    label.custom-control-label(for="chk10") Accessibilité aux écoles, ALSH, camps de jeunes hors Scoutisme français
+                h4 Quand peut on dormir sur place avec un groupe ?
+                .form-row
+                    .col
+                        .custom-control.custom-checkbox
+                            input.custom-control-input#chk11(type="checkbox" name="saison[0]" value="chk11") 
+                            label.custom-control-label(for="chk11") Eté
+                        .custom-control.custom-checkbox
+                            input.custom-control-input#chk12(type="checkbox" name="saison[1]" value="chk12") 
+                            label.custom-control-label(for="chk12") Automne
+                    .col
+                        .custom-control.custom-checkbox
+                            input.custom-control-input#chk13(type="checkbox" name="saison[2]" value="chk13") 
+                            label.custom-control-label(for="chk13") Hiver 
+                        .custom-control.custom-checkbox
+                            input.custom-control-input#chk14(type="checkbox" name="saison[3]" value="chk14") 
+                            label.custom-control-label(for="chk14") Printemps 
+                .form-row
+                    label Ressources de l'environnement
+                    input.form-control#ressources(type="text" name="ressources")
+                h4 Lieu du camps de base
+                .form-row
+                    .col
+                        label Adresse
+                        input.form-control#adresse(type="text" name="adresse")
+                        label Ville
+                        input.form-control#ville(type="text" name="ville")
+                    .col
+                        label Code postal
+                        input.form-control#cp(type="text" name="cp")
+                        label Région
+                        input.form-control#region(type="text" name="region")
+                .form-row
+                    label partenaires potentiels
+                    input.form-control#partenaires(type="text" name="partenaires")
+                .form-row
+                    label Objectifs de développement durable
+                    input.form-control#objectifs(type="text" name="objectifs")
+                    label Programmes
+                    textarea.form-control#programmes( cols="30", rows="3" name="programmes")
+                .form-row
+                    button.btn.btn-primary(name="sauvegarder" ) Enregistrer &nbsp;
+                        i.fa.fa-save 
+                    button#reset.btn.btn-success(type="reset" ) Effacer &nbsp;
+                        i.fa.fa-recycle
+    .container
+        p les camps de base permettent d’approfondir les pratiques de scoutisme et d’ancrer les projets pédagogiques dans les enjeux écologiques, économiques et culturels du développement durable. Ces lieux d’aventure permettent de rencontrer d’autres unités, de découvrir ou d’approfondir des techniques utiles à la construction d’un monde meilleur. Ce sont également des lieux où on peut trouver du soutien à la direction, de la formation etc...
+        link(rel='stylesheet', href='https://unpkg.com/leaflet@1.5.1/dist/leaflet.css', integrity='sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==', crossorigin='')
+        script(src='https://unpkg.com/leaflet@1.5.1/dist/leaflet.js', integrity='sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==', crossorigin='')
+        #mapid.mx-auto(style="height:100vh;width:90%;")
+    th
+    .container
+        h3 Liste des camps de base enregistrés en base de données :
+        table#campsDeBase.table.table-striped(style="background:white;")
+            thead
+                tr
+                    th #
+                    th Camps de base
+                    th Adresse
+                    th Partenaires
+                    th Ressources
+            tbody
+                tr
+                    // td(colspan="5") Aucun camps de base dans la base de données alter-égaux
+    .claire(style="width:100px;height:300px")
     script.
         var mymap = L.map('mapid').setView([48.85583, 2.349014], 7);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -17,8 +122,67 @@ block content
             id: 'mapbox.streets',
             accessToken: 'pk.eyJ1IjoiZ29vZGxpbmsiLCJhIjoiY2pjN2RoeGtpMDUzZjJ3bXJ3YXBmbXI5bCJ9.bNT1nyfMxbzC2fQHZbpAyQ'
         }).addTo(mymap);
+        mymap.once('focus', function() { mymap.scrollWheelZoom.enable(); });
+        mymap.scrollWheelZoom.disable();
+        //L.marker([51.5, -0.09]).addTo(mymap).bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+        var popup = L.popup();
         function onMapClick(e) {
-            console.log("You clicked the map at " + e.latlng);
+            console.log(e.latlng);
+            popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString()).openOn(mymap);
+            document.getElementById("coordinate").value=e.latlng;
+            if (mymap.scrollWheelZoom.enabled()) { mymap.scrollWheelZoom.disable(); }
+            else {mymap.scrollWheelZoom.enable();}
         }
+        function display(){
+            $("#curtain ").toggle('linear');
+        }
+        function disableScroll(){mymap.scrollWheelZoom.disable();}
 
         mymap.on('click', onMapClick);
+        mymap.on('mouseout',disableScroll);
+        function addLineToCampsTableAndMarkToMap(obj){
+            //[campsName,coordinates,pedago,odd,saison,ressources,adresse,ville,cp,region,partenaires,objectifs,programmes,ip,dateajout]
+            var html = "<tr><td>x</td><td>"+obj[0]+"</td><td>"+obj[6]+"\n"+obj[7]+"\t"+obj[8]+"\t"+obj[9]+"</td><td>"+obj[10]+"</td><td>"+obj[5]+"</td></tr>";
+            $("#campsDeBase tr:last").after(html);
+            var coordinates = [obj[1].split(",")[0].split("LatLng(")[1],obj[1].split(",")[1].split(")")[0]];
+            console.log(coordinates,obj[1]);
+            L.marker(coordinates).addTo(mymap).bindPopup(obj[0]).openPopup();
+        }
+        $("#curtain").hide();
+
+        $("#campBaseForm").on("submit",function(event){
+            event.preventDefault();
+            var form = $("#campBaseForm").serialize();
+            $.ajax({
+                type: "POST",
+                url: "addCampsBase",
+                data: form,
+                success: function(data) {
+                    console.log("camps de base added");
+                    console.log(data);
+                    addLineToCampsTableAndMarkToMap(data);
+                },
+                error: function() {
+                    alert("une erreur s'est produite lors de la mise à jour de ce camps de base, veuilllez en informer l'administrateur du site");
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+                $.ajax({
+                    type:"GET",
+                    url :"listCampsBase",
+                    success:function(data){
+                        console.log(data);
+                        data.forEach(function(elt){
+                            addLineToCampsTableAndMarkToMap(Object.values(elt));
+                        })
+                    },
+                    error:function(data){
+                        console.log(data);
+                        console.log("Error on fetching list listCampsBase");
+                    }
+                });
+        });
+
+
+        
