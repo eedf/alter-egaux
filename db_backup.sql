@@ -52,7 +52,6 @@ CREATE TABLE `action` (
 
 LOCK TABLES `action` WRITE;
 /*!40000 ALTER TABLE `action` DISABLE KEYS */;
-INSERT INTO `action` VALUES (7,'test action','La dream team','Nous','8','Adultes','Adultes','Eductation','2019-04-18','Test test tseeeeeeeeeeet','Chez nous','Nous avec nous même','blablabla@gmail.cz','Moi','Moimoi','flyers JDM 2.PNG','2019-04-15 12:28:57','164.177.0.225',1),(8,'test action','Test','Test','5','Lutin.e.s','Lutin.e.s','Paix','2019-05-29','fsfesfsd','fsfds','fesfd','fesfdsffe@desfdssf','fesfdsf','fesfdsfs','34259036_1242347909233120_4566048675192635392_n.jp','2019-05-10 11:41:58','77.136.41.204',1);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +174,7 @@ CREATE TABLE `membre_categorie` (
 
 LOCK TABLES `membre_categorie` WRITE;
 /*!40000 ALTER TABLE `membre_categorie` DISABLE KEYS */;
-INSERT INTO `membre_categorie` VALUES (1,'6/8 - Lutin.e.s'),(2,'8/11 - Louveteaux.ette.s'),(3,'11/15 - Lutin.e.s'),(4,'15/17 - Aîné.e.s'),(5,'18/25 - JAE.e.s'),(6,'+ de 25 - Adultes');
+INSERT INTO `membre_categorie` VALUES (1,'6/8 - Lutin.e.s'),(2,'8/11 - Louveteaux.ette.s'),(3,'11/15 - Elcé.e.s'),(4,'15/17 - Aîné.e.s'),(5,'18/25 - JAE.e.s'),(6,'+ de 25 - Adultes');
 /*!40000 ALTER TABLE `membre_categorie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-11  2:04:50
+-- Dump completed on 2019-11-18  0:08:53
