@@ -1,0 +1,109 @@
+extends layout.pug
+block title
+  title=titre
+block withoutContainer
+    .container
+        style=paddingvalue
+        nav(aria-label='breadcrumb')
+            ol.breadcrumb
+                li.breadcrumb-item
+                    a(href='/menu') Menu
+                li.breadcrumb-item.active(aria-current='page') Modérer les camps de base
+        .alert.alert-info 
+            span.fa-stack.fa-lg
+                i.fa.fa-circle.fa-stack-2x
+                i.fa.fa-exclamation.fa-stack-1x.fa-inverse
+            span Modérer les camps de base publiées par les utilisateurs
+    .container-fluid
+        h3 Liste des camps de base :
+        
+        table.table.stripped(id="example")
+            thead
+                th #
+                th Nom du groupe
+                th Structure
+                th Description
+                th Lieu
+                th Partenaires
+                th Contact
+                th IP
+                th Edition
+            tbody
+                - var i=1
+                
+                each elt in list
+                    tr
+                        td.align-middle=i++
+                        td.align-middle=elt.groupename
+                        td.align-middle
+                            dl
+                                dd Région : #{elt.region}
+                                dd Structure : #{elt.slaname}
+                                dd Projet par : #{elt.projectby}
+                                dd Projet pour : #{elt.projectfor}                              
+                        td.align-middle
+                            figure.figure
+                                img(src="/actionpics/"+elt.photo, alt="Photo action",width="150px")
+                                dl
+                                    dd Date : #{elt.dateofaction}
+                                    dd Theme : #{elt.themeofaction}
+                                    dd Description : #{elt.description}
+                        td.align-middle=elt.lieu
+                        td.align-middle=elt.partenaires
+                        td.align-middle 
+                            dl
+                                dd #{elt.prenomcontact} #{elt.nomcontact} 
+                                dd #{elt.contact}
+                        td.align-middle=elt.ipaddress
+                        td.align-middle
+                            button#validation.btn.btn-success(onclick='validation(this,'+elt.id+');', hidden=!(elt.publish===0))
+                                i.fa.fa-check &nbsp Activer
+                            button#unvalidation.btn.btn-warning(onclick='desactiver(this,'+elt.id+');', hidden=!(elt.publish===1))
+                                i.fa.fa-times &nbsp Désactiver
+                            button#delete.btn.btn-danger(onclick='deletion('+elt.id+');')
+                                i.fa.fa-trash &nbsp Supprimer
+                            br
+                            |
+                            span.small Date ajout : #{elt.datajout}
+block javascript
+    script.
+
+        function validation (e,id){
+            var ajax = $.ajax({url:"/actions/"+id+"/true",method:"PUT"});
+            ajax.done(function(msg){
+                if(msg){
+                    alert("Validation de l'action avec succés");
+                    window.location.href="action";
+                } 
+            });
+            ajax.fail(function(msg){
+                console.log(msg);
+            });
+        }
+        
+        function desactiver(e,id){
+            var ajax = $.ajax({url:"/actions/"+id+"/false",method:"PUT"});
+            ajax.done(function(msg){
+                if(msg){
+                    alert("C'est noté, l'action ne sera plus visible aux utilisateurs!");
+                    window.location.href="action";
+                }
+            });
+            ajax.fail(function(msg){
+                console.log(msg);
+            });
+        }
+        function deletion (id){
+            if(confirm("Attention la suppression est définitive \nVoulez vous vraiment supprimer cette action? ")){
+                var ajax = $.ajax({url:"/actions/"+id,method:"DELETE"});
+                ajax.done(function(msg){
+                    if(msg){
+                        alert("Action supprimée avec succés");
+                        window.location.href="action";
+                    } 
+                });
+                ajax.fail(function(msg){
+                    console.log(msg);
+                });
+            }
+        }
